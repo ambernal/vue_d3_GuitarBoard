@@ -1,0 +1,28 @@
+   </rect>
+                  fill=darkblue	      
+              x=100								 displacement from origin -->
+              y=100								 displacement from origin -->
+              rx=15							 how much to round corners - to be transitioned below-->
+              ry=15							 how much to round corners - to be transitioned below-->
+              width=15*2					 size of shape-->
+              height=15*2				 size of shape--> 
+scales : [
+ {"name":"pentatonicaMayor" ,"intervals": ["F","2M","3M","5J","6M"]},
+
+  ]
+ {"name":"pentatonicaMenor" ,"intervals: ["F","3m","4J","5J","7m"]},
+ {"name":"ionian" ,"intervals: ["F","2M","3M","4J","5J","6M","7M"]},
+ {"name":"dorian" ,"intervals: ["F","2M","3m","4J","5J","6M","7m"]},
+ {"name":"phrygian" ,"intervals: ["F","2M","3M","4J","5J","6m","7m"]},
+ {"name":"lydian" ,"intervals: ["F","2M","3M","4Aum","5J","6M","7M"]},
+ {"name":"mixolydian" ,"intervals: ["F","2M","3M","4J","5J","6M","7m"]},
+ {"name":"aeolian" ,"intervals: ["F","2M","3m","4J","5J","6m","7m"]},
+ {"name":"locrian" ,"intervals: ["F","2m","3m","4J","4Aum","6m","7m"]},
+ {"name":"acordesDominantes" ,"intervals: ["F","3M","5J","7m"]},
+ {"name":"acordesm7" ,"intervals: ["F","3m","5J","7m"]},
+ {"name":"acordesMayor7mayor" ,"intervals: ["F","3M","5J","7M"]},
+ {"name":"arpeggios" ,"intervals: []}
+
+
+
+
