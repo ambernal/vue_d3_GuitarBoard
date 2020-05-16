@@ -56,20 +56,20 @@
               :cx=getCircleOrTextXposition(interval)
               r=15
               cy=20
-              class='circle'
-              :data-interval=getInterval(interval)
+              class='circle-hidden'
+              :data-interval=getIntervalName(interval,index)
               >
               </circle> 
               <text
               v-for="interval in fretIntervals"
               :key="interval.id"
               :id=getTextId(interval,index)
-              :cx=getCircleOrTextXposition(interval)
+              :x=getCircleOrTextXposition(interval)
               :fret=interval
               :transform=getTransformText()
               text-anchor=middle
               y=25
-              :data-interval=getInterval(interval)
+              :data-interval=getIntervalName(interval,index)
               >
               </text>
               <rect
@@ -77,14 +77,14 @@
               :key="interval.id"
               :id=getRectangleId(interval,index,up)
               :fret=interval
-              fill=none
               :x=getRectangleXposition(interval)
               :y=getRectangleYposition(interval,up)									
               rx=10						
               ry=10							
               width=65				
               height=10
-              :data-interval=getInterval(interval)		
+              :data-interval=getIntervalName(interval,index)	
+              class='rect-hidden'	
               >
              </rect>
               <rect
@@ -92,14 +92,14 @@
               :key="interval.id"
               :id=getRectangleId(interval,index,middle)
               :fret=interval
-              fill=none
               :x=getRectangleXposition(interval)	
               :y=getRectangleYposition(interval,middle)							
               rx=0						
               ry=0							
               width=65				
               height=10	
-              :data-interval=getInterval(interval)	
+              :data-interval=getIntervalName(interval,index)	
+              class='rect-hidden'		
               >
              </rect>
              <rect
@@ -109,12 +109,12 @@
               :fret=interval
               :x=getRectangleXposition(interval)	
               :y=getRectangleYposition(interval,down)							
-              fill=none
               rx=10						
               ry=5							
               width=65				
               height=10
-              :data-interval=getInterval(interval)		
+              :data-interval=getIntervalName(interval,index)			
+              class='rect-hidden'		
               >
              </rect>
              <rect
@@ -122,16 +122,14 @@
               :key="interval.id"
               :id=getRectangleId(interval,index,left)
               :fret=interval
-              fill=none
-              stroke=red
-              stroke-width=2 
               :x=getRectangleXposition(interval)	
               :y=5							
               rx=10						
               ry=5							
               width=32				
               height=30
-              :data-interval=getInterval(interval)		
+              :data-interval=getIntervalName(interval,index)			
+              class='rect-hidden'	
               >
              </rect>
              <rect
@@ -139,16 +137,14 @@
               :key="interval.id"
               :id=getRectangleId(interval,index,right)
               :fret=interval
-              fill=none
-              stroke=red
-              stroke-width=2 
               :x=getRectangleXposition(interval,right)	
               :y=5							
               rx=10						
               ry=5							
               width=32				
               height=30
-              :data-interval=getInterval(interval)		
+              :data-interval=getIntervalName(interval,index)		
+              class='rect-hidden'		
               >
              </rect>
          </g> 
@@ -219,14 +215,7 @@ computed: {
     incrementIresetIntervalToPaintntervalToPaint(){
     this.$store.dispatch('resetIntervalToPaint')
    }, */
-   getInterval: function(interval){
-      if(interval.startsWith("12-")){
-            interval = interval.substring(3)
-             //console.log("fret interval 12->"+interval);
-        } 
-     return this.$store.getters.intervalsInfo[interval].name;
-     
-   },
+   
    getComplexInterval: function(interval){
      var complexInterval = 0;
       if(interval.startsWith("12-")){
@@ -273,6 +262,7 @@ computed: {
       return "translate(0, 0) scale(1, 1)"
     },
     getRectangleId: function (interval,cuerda,position) {
+      //console.log("getRectangleId-> interva- " +interval +"cuerda-> "+cuerda);
         var rectangleName ='';
        if(position === 'up'){
           rectangleName ='-rectUp'
@@ -286,33 +276,48 @@ computed: {
       return this.getBaseId(interval,cuerda)+rectangleName
     },
     getTextId: function (interval,cuerda) {
-      
+     //console.log("getTextId-> interva- " +interval +"cuerda-> "+cuerda);
       return this.getBaseId(interval,cuerda)+'-text'
     },
     getCircleId: function (interval,cuerda) {
-      
+      //console.log("getCircleId-> interva- " +interval +"cuerda-> "+cuerda);
       return this.getBaseId(interval,cuerda)
     },
-    
-    getBaseId: function(interval,cuerda) {
-      //console.log("getBaseId START cuerda->"+cuerda +' intervalo ->'+interval);
+    getIntervalName :function(interval,cuerda){
+      console.log("getCircleId-> interva- " +interval +" cuerda-> "+cuerda);
+       var currentInterval=  this.getInterval(interval,cuerda)
+         console.log("currentInterval-> "+currentInterval);
+        for(var key in this.$store.getters.intervalsInfo) {
+          console.log("bucle-> "+this.$store.getters.intervalsInfo[key].intervalo);
+                if (this.$store.getters.intervalsInfo[key].intervalo ==  currentInterval){
+                    return this.$store.getters.intervalsInfo[key].name
+                }
+        }
+        return ''
+    },
+    getInterval: function(interval,cuerda){
 
-      var idGenerated = '';
-       var octava = '';
         if(interval.startsWith("12-")){
-            octava= '12-';
             interval = interval.substring(3)
              //console.log("fret interval 12->"+interval);
         } 
        var stringRootInterval = this.getIntervalFretZeroFromTonicByString(cuerda);
-       // console.log("stringRootInterval->"+stringRootInterval);
+        //console.log("stringRootInterval->"+stringRootInterval);
        var currentIntervalToPaint = parseInt(stringRootInterval) +(parseInt(interval));
       //console.log("currentIntervalToPaint->"+currentIntervalToPaint);
      
       if(currentIntervalToPaint>11)         currentIntervalToPaint = currentIntervalToPaint - 12; 
-      
-     idGenerated = 'string-'+cuerda +'-'+ octava +this.$store.getters.intervalsInfo[currentIntervalToPaint].name
-     // console.log("getBaseId END idGenerated->"+idGenerated); 
+     return currentIntervalToPaint;
+   },
+    getBaseId: function(interval,cuerda) {
+      //console.log("getBaseId START cuerda->"+cuerda +' intervalo ->'+interval);
+
+     var idGenerated = '';
+     var octava = '';
+     if(interval.startsWith("12-"))     octava= '12-';
+     idGenerated = 'string-'+cuerda +'-'+ octava +this.$store.getters.intervalsInfo[this.getInterval(interval,cuerda)].name
+
+      //console.log("getBaseId END idGenerated->"+idGenerated); 
      return idGenerated
     },
      getIntervalFretZeroFromTonicByString: function(cuerda){
@@ -323,11 +328,10 @@ computed: {
     var cuerdaArrayPosition = cuerda -1;
     var noteZero =this.$store.getters.afinacion[cuerdaArrayPosition].label;
 
-    /* console.log('getIntervalFretZeroFromTonicByString string-> '+cuerdaArrayPosition);
+/*  console.log('getIntervalFretZeroFromTonicByString string-> '+cuerdaArrayPosition);
     console.log('getIntervalFretZeroFromTonicByString noteZero '+noteZero );
-    console.log('getIntervalFretZeroFromTonicByString tonica '+tonica );  */
+    console.log('getIntervalFretZeroFromTonicByString tonica '+tonica ); */  
   for(var key in this.$store.getters.mastilNotes) {
-
         if (this.$store.getters.mastilNotes[key].label ===  noteZero) {
           //console.log('getIntervalFretZeroFromTonicByString noteZero true');
             noteZero=true;
@@ -366,7 +370,7 @@ computed: {
 
     }
 
-   // console.log('getIntervalFretZeroFromTonicByString diferencia ' +diferencia);
+    //console.log('getIntervalFretZeroFromTonicByString diferencia ' +diferencia);
 
 return diferencia;
 
@@ -406,9 +410,31 @@ return diferencia;
 .fretboard{
 fill:#212529
 }
-.circle{
+.circle-active{
   fill:white;
   stroke:lightgrey;
+  stroke-width:2;
+}
+
+.circle-active-tonica{
+  fill:yellowgreen;
+  stroke:lightgrey;
+  stroke-width:2;
+}
+
+.circle-hidden{
+   fill:rgba(255, 255, 255, 0.01);
+  stroke:none;
+  stroke-width:0;  
+}
+.rect-hidden{
+   fill:rgba(255, 255, 255, 0.01);
+  stroke:none;
+  stroke-width:0;  
+}	
+.rect-active{
+  fill:none;
+  stroke:red;
   stroke-width:2;
 }
 </style>

@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       modesNames : this.$store.state.initialData.modesNames,
-      msg: "👋 from the ModesZone Component",
+      msg: "?? from the ModesZone Component",
       height: 285,
       width: 1300,
       initdataClass :'',
@@ -74,18 +74,17 @@ export default {
 
       //  console.log("Pintamos el interval ->" +scaleInterval[key]);
 
-   //   for (var cuerda=1; cuerda<7; cuerda++) {
+     for (var cuerda=1; cuerda<7; cuerda++) {
 
           /* var colour = 'white';
           if(this['note'] == this.$store.getters.tonica)colour='yellow'; */
           //pintaNote(cuerda,colour,this['note'],radioSizeCircle,strokeWidthCircle,stroke,this["interval"]);
-          var cuerda=1;
         this.paintInterval(cuerda,scaleInterval[key]);
       
 
 
-//}
-//console.log("Añadimos el intervalo a usedintervals");
+}
+//console.log("A�adimos el intervalo a usedintervals");
 //usedintervals(this["interval"]);
  }
 
@@ -112,29 +111,76 @@ export default {
   var scaleNotes = this.$store.getters.scaleIntervals[scaleType].intervals;
   //console.log("scaleNotes->" +JSON.stringify(scaleNotes, null, 2))
   return scaleNotes;
-    },
+   },
+
  paintInterval: function(string,interval){
- console.log("paintInterval->" +interval);
-d3.select("#string1").selectAll('circle').filter(function() {
-    return d3.select(this).attr("data-interval") == interval;
-}).each(function(){
-/*   var intervaloName=d3.select(this).attr("data-intervalo-name");
-   var noteName=  d3.select(this).html();
-   d3.select(this).text(intervaloName); */
-    d3.select(this).attr("data-intervalo-name",'pollas');
+  //console.log("paintInterval-> interval->" +interval +"string-> "+string);
+  this.updateCircles(string,interval);
+  this.updateText(string,interval);
 
- });
-
-
-
-
-
-   return string+interval;
+    return string+interval;
 
 
 
  },
-guitarBoardPaint(){
+ updateCircles: function(string,interval){
+
+  d3.select("#string"+string).selectAll('circle').filter(function() {
+      return d3.select(this).attr("data-interval") == interval;
+  }).each(function(){
+    if(interval === 'F'){
+        d3.select(this).attr("class",'circle-active-tonica');
+    }else   d3.select(this).attr("class",'circle-active');
+
+  });
+
+ },
+
+
+  updateText: function(string,interval){
+ console.log("updateText->");
+ var tonica = this.$store.getters.tonica
+console.log("tonica->" +tonica);
+var notaName = this.getNoteNameFromInterval(interval,tonica)
+  d3.select("#string"+string).selectAll('text').filter(function() {
+      return d3.select(this).attr("data-interval") == interval;
+  }).each(function(){
+        d3.select(this).text(notaName);
+
+  });
+
+ },
+  getNoteNameFromInterval: function(interval,tonica){
+var intervaloPosition = '';
+var tonicaPosition = '';
+var notePosition = '';
+console.log("interval->" +interval);
+console.log("tonica->" +tonica);
+ for(var key in this.$store.getters.intervalsInfo) {
+     if(this.$store.getters.intervalsInfo[key].name == interval)  {
+      intervaloPosition = this.$store.getters.intervalsInfo[key].intervalo;
+      break;
+
+     }
+ }   
+  for(var keyNote in this.$store.getters.mastilNotes) {
+      if(this.$store.getters.mastilNotes[keyNote].label == tonica)  {
+         console.log("Label->" +this.$store.getters.mastilNotes[keyNote].label);
+      tonicaPosition = this.$store.getters.mastilNotes[keyNote].id;
+      break;
+
+      }
+    }
+
+  notePosition = parseInt(intervaloPosition) + parseInt(tonicaPosition);
+  if(notePosition>11) notePosition = notePosition -12;
+console.log("notePosition->" +this.$store.getters.mastilNotes[notePosition].label);
+
+  return this.$store.getters.mastilNotes[notePosition].label;
+
+ },
+guitarBoardPaint: function () {
+  
 var svgDashBoard = d3.select("#dashboard");
 var mastil=  svgDashBoard;
  var trastes=  mastil.append("g");
@@ -159,43 +205,8 @@ for(var traste = 0 ; traste<16 ; traste ++){
 }
          },
 
-      fetchDataInitial(){
-        //this.fetchData();
-       // this.initPaintData = this.loadData.boardSize.fretClass;
-       //this.initPaintData = this.initPaintData.boardSize.fretClass;
-        console.log("initdata" + JSON.stringify(this.initdata.boardSize.fretClass, null, 2));
-        this.initdataClass = this.initdata.boardSize.fretClass;
-        console.log("initdataClass " + this.initdataClass);
-        
-      },
-   /*   async fetchData() {
-       let data = await d3.json("./tweets.json");
-      console.log("data tras el await" + JSON.stringify(data, null, 2));
-      this.initPaintData = data;
-      this.initdataClass =this.initPaintData.boardSize.fretClass;
-    }, */
+   },
 
-    packChart() {
-        const output = '';
-      return output ;  
-    }
-  },
-  computed: {
-    mountainBike: {
-      get () {
-        return this.$store.state.actividades.esqui
-      }
-    },
-    packData() {
-    
-      return this.initdata;
-    },
-    output() {
-       // let init= this.initdata;
-       // console.log("data2" + JSON.stringify(init, null, 2));
-      return this.initdata;
-    }
-  }
 };
 </script>
 
