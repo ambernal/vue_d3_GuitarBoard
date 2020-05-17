@@ -58,6 +58,7 @@
               cy=20
               class='circle-hidden'
               :data-interval=getIntervalName(interval,index)
+              :data-used=0
               >
               </circle> 
               <text
@@ -154,22 +155,36 @@
     </svg>
 
 </div>
-
 </div>
+<div style="padding-top: 15px;">---{{scalesPainted}}</div>
 <div class="row">
-<!-- <div>
-    <GuitarBoard :initdata=loadData />
-
-  </div>-->
   <div class="col-3">
     <ModesZone />
   </div> 
+    <div class="col-9">
+      <ControlPanelZone />
+      <div class="row">
+        <div class="col-4">
+         <ScalesSelectedZone :scale="scalesPainted[0]" :index="0"/>
+        </div>
+        <div class="col-4">
+          <ScalesSelectedZone :scale="scalesPainted[1]" :index="1"/>
+        </div>
+        <div class="col-4">
+          <ScalesSelectedZone :scale="scalesPainted[2]" :index="2"/>
+        </div> 
+      </div>
+    </div>
+
 </div>  
+
   </div>
 </template>
 
 <script>
 import ModesZone from './components/ModesZone.vue';
+import ControlPanelZone from './components/ControlPanelZone.vue';
+import ScalesSelectedZone from  './components/ScalesSelectedZone.vue';
 //import GuitarBoard from './components/GuitarBoard.vue';
 
 //import * as d3 from 'd3';
@@ -179,11 +194,15 @@ export default {
   components: {
   /*   HelloWorld, */
     //GuitarBoard,
-    ModesZone
+    ModesZone,
+    ControlPanelZone,
+   ScalesSelectedZone,
+   
   },
 
  data: function() {
     return {
+      //scalesPainted: this.$store.getters.scalesPainted,
       up: 'up',
       middle: 'middle',
       down: 'down',
@@ -197,24 +216,35 @@ export default {
       fretIntervals: this.$store.state.initialData.fretIntervals,
       stringTranslateStart : this.$store.state.initialData.boardSize.stringTranslateStart,
       stringTranslateSeparator : this.$store.state.initialData.boardSize.stringTranslateSeparator,
-      loadData: []
+      loadData: [],
+      index: 1,
+      options: [{
+          value:1,
+          label:'option1'
+      },{
+          value:2,
+          label:'option2'
+      }],
+      selected:{
+          value:1,
+          label:'option1'
+      },
+      placement:'down'
+    
     };
   },
-  created() {
-    console.log("App loaded");
-    //this.fetchData();
-      console.log("App loaded<-");
+  beforeUpdate(){
+      console.log('igual no me chupa los huevos vue App');
   },
-computed: {
-
-},
+  update(){
+      console.log('igual no me chupa los huevos vue 2 App');
+  },
+ computed:{
+       scalesPainted:function() {
+         return this.$store.getters.scalesPainted
+      } 
+  },
   methods: {
-  /*  incrementIntervalToPaint : function(){
-    this.$store.dispatch('incrementIntervalToPaint')
-   },
-    incrementIresetIntervalToPaintntervalToPaint(){
-    this.$store.dispatch('resetIntervalToPaint')
-   }, */
    
    getComplexInterval: function(interval){
      var complexInterval = 0;
@@ -284,11 +314,11 @@ computed: {
       return this.getBaseId(interval,cuerda)
     },
     getIntervalName :function(interval,cuerda){
-      console.log("getCircleId-> interva- " +interval +" cuerda-> "+cuerda);
+      //console.log("getCircleId-> interva- " +interval +" cuerda-> "+cuerda);
        var currentInterval=  this.getInterval(interval,cuerda)
-         console.log("currentInterval-> "+currentInterval);
+         //console.log("currentInterval-> "+currentInterval);
         for(var key in this.$store.getters.intervalsInfo) {
-          console.log("bucle-> "+this.$store.getters.intervalsInfo[key].intervalo);
+          //console.log("bucle-> "+this.$store.getters.intervalsInfo[key].intervalo);
                 if (this.$store.getters.intervalsInfo[key].intervalo ==  currentInterval){
                     return this.$store.getters.intervalsInfo[key].name
                 }
@@ -328,9 +358,9 @@ computed: {
     var cuerdaArrayPosition = cuerda -1;
     var noteZero =this.$store.getters.afinacion[cuerdaArrayPosition].label;
 
-/*  console.log('getIntervalFretZeroFromTonicByString string-> '+cuerdaArrayPosition);
+/*   console.log('getIntervalFretZeroFromTonicByString string-> '+cuerdaArrayPosition);
     console.log('getIntervalFretZeroFromTonicByString noteZero '+noteZero );
-    console.log('getIntervalFretZeroFromTonicByString tonica '+tonica ); */  
+    console.log('getIntervalFretZeroFromTonicByString tonica '+tonica );  */ 
   for(var key in this.$store.getters.mastilNotes) {
         if (this.$store.getters.mastilNotes[key].label ===  noteZero) {
           //console.log('getIntervalFretZeroFromTonicByString noteZero true');
@@ -349,12 +379,9 @@ computed: {
         }
     }
     // TODO porque se repite
-
     if(!tonicaBoolean){
       //console.log('getIntervalFretZeroFromTonicByString como no se ha llegado a la tonica volvemos a recorrer');
-
       //si no se ha encontrado la tonica aun volvemos a recorrer el array desde el ppio para ver el num de notas que faltan
-
         for(var keySecondLoop in this.$store.getters.mastilNotes) {
     //  console.log('getIntervalFretZeroFromTonicByString ====================mastilNotes !tonica '+this.$store.getters.mastilNotes[keySecondLoop].label );
             if (this.$store.getters.mastilNotes[keySecondLoop].label ===  tonica) {
@@ -365,13 +392,9 @@ computed: {
              // console.log('getIntervalFretZeroFromTonicByString diferencia++');
                     diferencia++;
              }
-
         }
-
     }
-
     //console.log('getIntervalFretZeroFromTonicByString diferencia ' +diferencia);
-
 return diferencia;
 
 }

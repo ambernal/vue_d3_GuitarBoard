@@ -20,7 +20,8 @@ scaleIntervals : [
     {index: 13,name:"arpeggios" ,intervals: []}
 
    
-  ]
+  ],
+
 }
 
 

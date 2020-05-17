@@ -6,7 +6,7 @@ const state = {
         height: 285,
         width: 1300,
         fretBoardHeight: 230,
-        fretBoardWidth: 1075,
+        fretBoardWidth: 1080,
         stringTranslateStart:20,
         stringTranslateSeparator:40,
         circleAndTextTranslateStart:50,
@@ -23,15 +23,15 @@ const state = {
     },
     modesNames : [
       
-      { name: 'Pentatonic Mayor', index: 7 , mayorRelative : 0, minorRelative: 0},
-      { name: 'Pentatonic Menor', index: 8 , mayorRelative : 0, minorRelative: 0},
-      { name: 'Major / Ionian', index: 0 , mayorRelative : 0, minorRelative: 9},
-      { name: 'Dorian', index: 1 , mayorRelative : 10, minorRelative: 7},
-      { name: 'Phrygian', index: 2 , mayorRelative : 8, minorRelative: 5},
-      { name: 'Lydian', index: 3 , mayorRelative : 7, minorRelative: 4},
-      { name: 'Mixolydian', index: 4 , mayorRelative : 5, minorRelative: 2},
-      { name: 'N Minor / Aeolian', index: 5 , mayorRelative : 0, minorRelative: 0},
-      { name: 'Locrian', index: 6 , mayorRelative : 1, minorRelative: 10},
+      { name: 'Pentatonic Mayor', index: 1 , mayorRelative : 0, minorRelative: 0},
+      { name: 'Pentatonic Menor', index: 2 , mayorRelative : 0, minorRelative: 0},
+      { name: 'Major / Ionian', index: 3 , mayorRelative : 0, minorRelative: 9},
+      { name: 'Dorian', index: 4 , mayorRelative : 10, minorRelative: 7},
+      { name: 'Phrygian', index: 5 , mayorRelative : 8, minorRelative: 5},
+      { name: 'Lydian', index: 6 , mayorRelative : 7, minorRelative: 4},
+      { name: 'Mixolydian', index: 7 , mayorRelative : 5, minorRelative: 2},
+      { name: 'N Minor / Aeolian', index: 8 , mayorRelative : 0, minorRelative: 0},
+      { name: 'Locrian', index: 9 , mayorRelative : 1, minorRelative: 10},
       
   ],
     signalFretCoordenates : [

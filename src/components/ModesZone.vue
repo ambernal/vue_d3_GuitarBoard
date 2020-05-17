@@ -31,29 +31,40 @@ export default {
   data() {
     return {
       modesNames : this.$store.state.initialData.modesNames,
-      msg: "?? from the ModesZone Component",
-      height: 285,
-      width: 1300,
-      initdataClass :'',
-      weight: ''
     };
   },
-  
+   computed:{
+      scaledPainted:function() {
+         return  this.$store.getters.scalesPainted
+      }
+  }, 
+  beforeUpdate(){
+      console.log('igual no me chupa los huevos vue ModesZone');
+  },
+  update(){
+      console.log('igual no me chupa los huevos vue 2 ModesZone');
+  },
   methods: {
-    incrementIntervalToPaint : function(){
-    this.$store.dispatch('addScalePainted')
-   },
+
     showMode: function(mode){
-      console.log('chupame los huevos vue' +mode)
+     // console.log('chupame los huevos vue ' + mode)
+     //  console.log('scaledPainted.length ' +this.scaledPainted.length)
+      if(this.scaledPainted.length<4){
+        var id=0;
+        for(var key in this.scaledPainted) {
+                if(this.scaledPainted[key].used==false) id= key
+        }
       var scale = {};
+              scale ["id"] = id
               scale ["mode"] = mode;
-              scale ["onlyBoxes"] = 0;
-              scale ["name"] = this.$store.state.initialData.modesNames[mode].name;
+              scale ["used"] = true;
+              /*  scale ["onlyBoxes"] = 0;
+             scale ["name"] = this.$store.state.initialData.modesNames[mode].name;
               scale ["mayorRelative"] = this.$store.state.initialData.modesNames[mode].mayorRelative;
-              scale ["minorRelative"] = this.$store.state.initialData.modesNames[mode].minorRelative;
+              scale ["minorRelative"] = this.$store.state.initialData.modesNames[mode].minorRelative; */
               this.$store.commit('addScalePainted',scale);
-              //scalesPainted.push(scale);
-                this.paintScale(mode);
+              this.paintScale(mode);
+      }
   },
   paintScale:function(indexMode){
       //console.log("scaleNotes->" +JSON.stringify(this.$store.state.getter.scalesPainted, null, 2))
@@ -84,7 +95,7 @@ export default {
 
 
 }
-//console.log("Añadimos el intervalo a usedintervals");
+//console.log("Aï¿½adimos el intervalo a usedintervals");
 //usedintervals(this["interval"]);
  }
 
@@ -128,23 +139,28 @@ export default {
   d3.select("#string"+string).selectAll('circle').filter(function() {
       return d3.select(this).attr("data-interval") == interval;
   }).each(function(){
+    
+    var used =d3.select(this).attr("data-used");
+
+
     if(interval === 'F'){
         d3.select(this).attr("class",'circle-active-tonica');
     }else   d3.select(this).attr("class",'circle-active');
-
+       d3.select(this).attr("data-used",+parseInt(used)+1);
   });
 
  },
 
 
   updateText: function(string,interval){
- console.log("updateText->");
+ //console.log("updateText->");
  var tonica = this.$store.getters.tonica
-console.log("tonica->" +tonica);
-var notaName = this.getNoteNameFromInterval(interval,tonica)
+// console.log("tonica->" +tonica);
+ var notaName = this.getNoteNameFromInterval(interval,tonica)
   d3.select("#string"+string).selectAll('text').filter(function() {
       return d3.select(this).attr("data-interval") == interval;
   }).each(function(){
+        d3.select(this).attr("data-note",notaName);
         d3.select(this).text(notaName);
 
   });
@@ -154,8 +170,8 @@ var notaName = this.getNoteNameFromInterval(interval,tonica)
 var intervaloPosition = '';
 var tonicaPosition = '';
 var notePosition = '';
-console.log("interval->" +interval);
-console.log("tonica->" +tonica);
+/* console.log("interval->" +interval);
+console.log("tonica->" +tonica); */
  for(var key in this.$store.getters.intervalsInfo) {
      if(this.$store.getters.intervalsInfo[key].name == interval)  {
       intervaloPosition = this.$store.getters.intervalsInfo[key].intervalo;
@@ -165,7 +181,7 @@ console.log("tonica->" +tonica);
  }   
   for(var keyNote in this.$store.getters.mastilNotes) {
       if(this.$store.getters.mastilNotes[keyNote].label == tonica)  {
-         console.log("Label->" +this.$store.getters.mastilNotes[keyNote].label);
+         //console.log("Label->" +this.$store.getters.mastilNotes[keyNote].label);
       tonicaPosition = this.$store.getters.mastilNotes[keyNote].id;
       break;
 
@@ -174,36 +190,11 @@ console.log("tonica->" +tonica);
 
   notePosition = parseInt(intervaloPosition) + parseInt(tonicaPosition);
   if(notePosition>11) notePosition = notePosition -12;
-console.log("notePosition->" +this.$store.getters.mastilNotes[notePosition].label);
+    //console.log("notePosition->" +this.$store.getters.mastilNotes[notePosition].label);
 
   return this.$store.getters.mastilNotes[notePosition].label;
 
  },
-guitarBoardPaint: function () {
-  
-var svgDashBoard = d3.select("#dashboard");
-var mastil=  svgDashBoard;
- var trastes=  mastil.append("g");
-for(var traste = 0 ; traste<16 ; traste ++){
- trastes.append("rect")
-            .attr("x",85 +70*traste)
-            .attr("y", 35)
-            .attr("width", 5)
-            .attr("height", 210)
-            .attr("fill",function () {
-
-
-             if(traste == 0){
-                 return "black";
-            }else{
-                return "none";
-            }
-
-          })
-          .attr("class", 'fretCircle') 
-
-}
-         },
 
    },
 
