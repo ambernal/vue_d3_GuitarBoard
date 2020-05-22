@@ -48,9 +48,7 @@ export default {
   data() {
     return {
       notes: this.$store.getters.notes,
-      modesNames : this.$store.state.initialData.modesNames,
-      scalesBoxData :''
-
+      modesNames : this.$store.state.initialData.modesNames
     };
   },
    computed:{
@@ -58,11 +56,7 @@ export default {
          return this.$store.getters.scalesPainted
       }
   },
-  created() {
-    //console.log("ControlPanelZone created");
-     this.fetchDataInitial();
-     //console.log("ControlPanelZone created<-");
-  },
+ 
   beforeUpdate(){
       console.log('igual no me chupa los huevos vue ControlPanelZone ');
   },
@@ -70,11 +64,7 @@ export default {
       console.log('igual no me chupa los huevos vue 2 ControlPanelZone');
   },
   methods: {
-       async fetchDataInitial() {
-       let scalesBox = await d3.json("./scalesBox.json");
-      //console.log("scalesBox tras el await" + JSON.stringify(scalesBox, null, 2));
-      this.scalesBoxData = scalesBox;
-    }, 
+  
     changeTonicNote: function changeItem( event) {
      this.$store.commit('changeTonicNote',event.target.value);
     },

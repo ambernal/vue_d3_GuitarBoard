@@ -49,30 +49,6 @@
             y2=20
             class='guitarString'
           ></line>
-             <circle
-              v-for="interval in fretIntervals"
-              :key="interval.id"
-              :id=getCircleId(interval,index)
-              :cx=getCircleOrTextXposition(interval)
-              r=15
-              cy=20
-              class='circle-hidden'
-              :data-interval=getIntervalName(interval,index)
-              :data-used=0
-              >
-              </circle> 
-              <text
-              v-for="interval in fretIntervals"
-              :key="interval.id"
-              :id=getTextId(interval,index)
-              :x=getCircleOrTextXposition(interval)
-              :fret=interval
-              :transform=getTransformText()
-              text-anchor=middle
-              y=25
-              :data-interval=getIntervalName(interval,index)
-              >
-              </text>
               <rect
               v-for="interval in fretIntervals"
               :key="interval.id"
@@ -148,6 +124,30 @@
               class='rect-hidden'		
               >
              </rect>
+              <circle
+              v-for="interval in fretIntervals"
+              :key="interval.id"
+              :id=getCircleId(interval,index)
+              :cx=getCircleOrTextXposition(interval)
+              r=15
+              cy=20
+              class='circle-hidden'
+              :data-interval=getIntervalName(interval,index)
+              :data-used=0
+              >
+              </circle>
+              <text
+              v-for="interval in fretIntervals"
+              :key="interval.id"
+              :id=getTextId(interval,index)
+              :x=getCircleOrTextXposition(interval)
+              :fret=interval
+              :transform=getTransformText()
+              text-anchor=middle
+              y=25
+              :data-interval=getIntervalName(interval,index)
+              >
+              </text>
          </g> 
      </g>    
     </g> 
@@ -156,10 +156,10 @@
 
 </div>
 </div>
-<div style="padding-top: 15px;">---{{scalesPainted}}</div>
+<div style="padding-top: 15px;"></div>
 <div class="row">
   <div class="col-3">
-    <ModesZone />
+    <ModesZone :scalesUsed="this.scalesPainted"/>
   </div> 
     <div class="col-9">
       <ControlPanelZone />
@@ -234,10 +234,18 @@ export default {
     };
   },
   beforeUpdate(){
-      console.log('igual no me chupa los huevos vue App');
+      console.log('beforeUpdate App');
+      for(var index in this.scaledPainted) {
+                if(this.scaledPainted[index].onlyBoxes> 0) console.log("Chupame los huevos mother fucker2!!!!");
+      }
   },
   update(){
-      console.log('igual no me chupa los huevos vue 2 App');
+      console.log('update App');
+
+      
+      for(var index in this.scaledPainted) {
+                if(this.scaledPainted[index].onlyBoxes> 0) console.log("Chupame los huevos mother fucker!!!!");
+      }
   },
  computed:{
        scalesPainted:function() {
@@ -455,9 +463,14 @@ fill:#212529
   stroke:none;
   stroke-width:0;  
 }	
-.rect-active{
-  fill:none;
-  stroke:red;
-  stroke-width:2;
+.rect-active-one-used{
+  fill:#CD5C5C;
+  stroke:#CD5C5C;
+  stroke-width:1;
+}
+.rect-active-two-used{
+  fill:#fff9d9;
+  stroke:#fff9d9;
+  stroke-width:1;
 }
 </style>

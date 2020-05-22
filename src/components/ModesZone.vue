@@ -1,22 +1,17 @@
 <template>
-
 <div class="btn-group-vertical"  role="group">
    <button
     v-for="mode in modesNames" 
     :key="mode.id"
     type='button'
-    @click="showMode(mode.index)" 
+    @click="showMode(mode.index,$event)" 
     class='btn btn-outline-dark'
    >{{mode.name}}
 </button>
+{{this.scalesUsed}}
+--{{this.scalesBoxData}}
+{{ this.paintAllScales()}}
 </div>
-
-<!-- //btn-outline-secondary
-    <button @click="guitarBoardPaint">YEahhh</button>
-    {{this.$store.state.actividades.esqui }}-- {{esqui}}
-    <div>
-    </div>
--->
 </template>
 
 <script>
@@ -27,126 +22,249 @@ import * as d3 from "d3";
 }; */
 export default {
   name: "ModesZone",
-  
+  props: {
+    scalesUsed: {type: Array, default: () => []}
+  },  
   data() {
     return {
       modesNames : this.$store.state.initialData.modesNames,
+      scalesBoxData :''
     };
   },
    computed:{
       scaledPainted:function() {
          return  this.$store.getters.scalesPainted
+      },
+      getBox1_Pent_Mayor:function() {
+         return  this.$store.getters.box1_Pent_Mayor
       }
   }, 
+   created() {
+    //console.log("ControlPanelZone created");
+     this.fetchDataInitial();
+     //this.scalesBoxData = this.getBox1_Pent_Mayor;
+     //console.log("ControlPanelZone created<-");
+  },
   beforeUpdate(){
-      console.log('igual no me chupa los huevos vue ModesZone');
+      console.log('beforeUpdate ModesZone');
+       var keys = Object.keys(this.scalesBoxData);
+          console.log(keys[7]); 
+       //   await this.$nextTick();
+       //this.$nextTick(this.paintAllScales(this.scalesBoxData));
+       //this.$nextTick(() => this.paintAllScales());
+      // this.paintAllScales(this.scalesBoxData);
+      console.log('beforeUpdate ModesZone<-');
   },
   update(){
-      console.log('igual no me chupa los huevos vue 2 ModesZone');
+      console.log('update ModesZone');
   },
   methods: {
-
-    showMode: function(mode){
-     // console.log('chupame los huevos vue ' + mode)
+    async fetchDataInitial() {
+       let scalesBox = await d3.json("./scalesBox.json");
+      //console.log("scalesBox tras el await" + JSON.stringify(scalesBox, null, 2));
+      this.scalesBoxData = scalesBox;
+      // console.log("JODERRRRRRRRRRRRRRRRRRRRRRRRR->" +JSON.stringify(this.scalesBoxData, null, 2))
+       //console.log("BoxNotes->" +JSON.stringify(this.scalesBoxData["box1_Pent_Mayor"], null, 2))
+/*           var keys = Object.keys(this.scalesBoxData);
+          console.log(keys[7]);  */
+    },
+    showMode: function(mode,$event){
+      //console.log('showMode se ejecuta ' + mode)
      //  console.log('scaledPainted.length ' +this.scaledPainted.length)
+     $event.target.classList.toggle('btn-warning')
       if(this.scaledPainted.length<4){
         var id=0;
+        //var used = 0;
+        var freeSpace = false;
         for(var key in this.scaledPainted) {
-                if(this.scaledPainted[key].used==false) id= key
+            //console.log("Id Is used "+this.scaledPainted[key].id);
+            // console.log("Is used "+this.scaledPainted[key].used);
+                if(this.scaledPainted[key].used==false &&!freeSpace){
+                    id= this.scaledPainted[key].id
+                    freeSpace=true;
+                    //console.log("Id selected "+this.scaledPainted[key].id);
+                   
+                } /* else  if(this.scaledPainted[key].used==true){
+                   //console.log("used++ ");
+                  used++
+                } */
         }
+        if(freeSpace){
       var scale = {};
               scale ["id"] = id
               scale ["mode"] = mode;
               scale ["used"] = true;
-              /*  scale ["onlyBoxes"] = 0;
-             scale ["name"] = this.$store.state.initialData.modesNames[mode].name;
+              var onlyBoxes = [] //its the first time that i paint the scale so onlyBoxes = empty
+              scale ["onlyBoxes"] = onlyBoxes;
+             /* scale ["name"] = this.$store.state.initialData.modesNames[mode].name;
               scale ["mayorRelative"] = this.$store.state.initialData.modesNames[mode].mayorRelative;
               scale ["minorRelative"] = this.$store.state.initialData.modesNames[mode].minorRelative; */
               this.$store.commit('addScalePainted',scale);
-              this.paintScale(mode);
+              //this.paintAllScales(this.scalesBoxData);
+              this.paintAllScales();
       }
+    }
   },
-  paintScale:function(indexMode){
+  paintAllScales: function(){
+    //paintAllScales: function(InternalscalesBoxData){
+
+    var used ='';
+    for(var key in this.scaledPainted) {
+         if(this.scaledPainted[key].used==true){
+                   //console.log("used++ ");
+                  used++
+                }
+    }  
+      //console.log("reinicio!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+      this.resetCircles();
+        for(var index in this.scaledPainted) {
+          console.log("Pinto el scaledPainted !!!!" + index);
+         // if(this.scaledPainted[index].used) this.paintScale(this.scaledPainted[index].onlyBoxes,this.scaledPainted[index].mode,used,index,InternalscalesBoxData);
+          if(this.scaledPainted[index].used) this.paintScale(this.scaledPainted[index].onlyBoxes,this.scaledPainted[index].mode,used,index);
+
+        }
+      return;
+  },
+ //paintScale:function(onlyBoxes,indexMode,used,numberScaledPainted,internalscalesBoxData){
+   paintScale:function(onlyBoxes,indexMode,used,numberScaledPainted){
       //console.log("scaleNotes->" +JSON.stringify(this.$store.state.getter.scalesPainted, null, 2))
-
-     /*  if(this.$store.state.getter.scalesPainted===1){
-        console.log("ya hay una escala pintada");
-      // stroke='#72ff00';
-      }else if(this.$store.state.getter.scalesPainted===2){
-        console.log("ya hay 2 escalas pintada");
-
-      }else if(this.$store.state.getter.scalesPainted>=3){
-        console.log("STOP!!! ya hay mas de 3 escala pintada");
+     //console.log("paintScale-> Pintamos el indexMode ->"+indexMode +"used-> " +used);
+    // console.log("InternalscalesBoxData ->"+internalscalesBoxData);
+      var scaleInterval ="";
+     if(onlyBoxes.length==0 ||onlyBoxes[0]==0){
+       //console.log("Hay que pintar escala completa");
+        scaleInterval = this.getScaleIntervals(parseInt(indexMode)-1);
+        for(var key in scaleInterval) {
+        //  console.log("Pintamos el interval ->" +scaleInterval[key]);
+          for (var string=1; string<7; string++) {
+            this.paintInterval(string,scaleInterval[key],used,numberScaledPainted);
+          }
+        }
+      }else {
+        //console.log("Hay que pintar boxes");
+        //onlyBoxes.forEach(function(box){
+        for(var box in onlyBoxes) {  
+          console.log("box to paint->" +box);
+                 
+            //var boxToPaint = this.getScalesBoxData["box1_Pent_Mayor"];
+            // var boxToPaint = this.getBox1_Pent_Mayor;
+             var boxToPaint = this.scalesBoxData["box1_Pent_Mayor"];
+           //var boxToPaint = internalscalesBoxData["box1_Pent_Mayor"];
+             //console.log("box to paint->" +boxToPaint);
+            Object.keys(boxToPaint).forEach(key => {
+            // console.log(key + ' - ' + JSON.stringify(boxToPaint[key], null, 2));
+             var stringToPaint = boxToPaint[key];
+              Object.keys(stringToPaint).forEach(string => {
+                stringToPaint[string].forEach(interval => {
+                   // console.log("intervaloBox= "+interval +" string" +string +" used" +used +" numberScaledPainted" +numberScaledPainted)
+                     this.paintInterval(string,interval,used,numberScaledPainted)
+                });
+             }); 
+            });
+        }
       }
- */
-      var scaleInterval = this.getScaleIntervals(indexMode);
 
-      for(var key in scaleInterval) {
-
-      //  console.log("Pintamos el interval ->" +scaleInterval[key]);
-
-     for (var cuerda=1; cuerda<7; cuerda++) {
-
-          /* var colour = 'white';
-          if(this['note'] == this.$store.getters.tonica)colour='yellow'; */
-          //pintaNote(cuerda,colour,this['note'],radioSizeCircle,strokeWidthCircle,stroke,this["interval"]);
-        this.paintInterval(cuerda,scaleInterval[key]);
-      
-
-
-}
-//console.log("A�adimos el intervalo a usedintervals");
-//usedintervals(this["interval"]);
- }
-
-
-
-//console.log("Ahora ya pintamos las opciones para el modo "+index);
-
-//paintIntervals();
-
-
-
-//con el scalesPainted updated volvemos a pintar el panel
-
-//paintSelectModes();
-//paintOptions(0, index);
-//paintOptions(0);
-
-//jsonObj = [];
-  //pongo a uno que hay una escala ya pintada
- // isAScalePaint=1;
 },
  getScaleIntervals: function( scaleType) {
- // console.log("getScaleIntervals->" +scaleType);
+  //console.log("getScaleIntervals->" +scaleType);
   var scaleNotes = this.$store.getters.scaleIntervals[scaleType].intervals;
   //console.log("scaleNotes->" +JSON.stringify(scaleNotes, null, 2))
   return scaleNotes;
    },
 
- paintInterval: function(string,interval){
-  //console.log("paintInterval-> interval->" +interval +"string-> "+string);
-  this.updateCircles(string,interval);
-  this.updateText(string,interval);
+ paintInterval: function(string,interval,scalesNumber,numberScaledPainted){
+  var name="#string-"+string+"-"+interval;
+   // console.log("paintInterval-> interval-> " +interval +" string-> "+string + " scalesNumber-> "+scalesNumber + " numberScaledPainted-> "+numberScaledPainted+" name=>"+name);
 
-    return string+interval;
+  var usedCurrentInterval =d3.select(name).attr("data-used");
+  // var dataInterval =d3.select(name).attr("data-interval");
+  //console.log("name-> "+name +" - usedCurrentInterval-> " +usedCurrentInterval + " dataInterval-> "+dataInterval);
+  
+  //if this interval never has been painted and it´s the first scale dont paint background
+  if(usedCurrentInterval==0){
+    //console.log("entra en 0!!!!!!")
+    this.updateCircles(string,interval);
+    this.updateText(string,interval);
 
+  }
+    //if this interval never has been painted <2 and it´s the second scale  paint background
+   if(usedCurrentInterval<2 && scalesNumber>1){
+    /*  console.log("entra en 1!!!!!!")
+     console.log("usedCurrentInterval-> " +usedCurrentInterval ); */
+    this.updateLateralRect(string,interval,scalesNumber,usedCurrentInterval,numberScaledPainted);
+  }else if(usedCurrentInterval==2){
+    // console.log("entra en 2!!!!!!")
+      this.updateColumRect(string,interval);
+  }  
+   /*  console.log("Actualizo data-used con ===================================")
+     console.log("name 2º parte-> "+name +" - usedCurrentInterval-> " +usedCurrentInterval );
+     console.log(" ===================================") */
 
+    d3.select("#string-"+string+"-"+interval).attr("data-used",parseInt(usedCurrentInterval)+1);
+    return ;
+ },
+ updateSingleRect: function(string,interval){
+    d3.select("#string-"+string+"-"+interval+"-left" ).attr("class","rect-active")
+   return string + interval
+ },
+ updateColumRect: function(string,interval){
+   return string + interval
+ },
+ updateLateralRect: function(string,interval,scalesNumber,usedCurrentInterval,numberScaledPainted){
+
+var leftPart = ""
+var rightPart = ""
+if(usedCurrentInterval==0){
+    if(numberScaledPainted ==0) {
+        leftPart ="rect-active-one-used";
+        rightPart="rect-active-one-used";
+    }else  if(numberScaledPainted ==1) {
+        leftPart ="rect-active-two-used";
+        rightPart="rect-active-two-used";
+    } 
+}else if(usedCurrentInterval==1){
+      leftPart ="rect-active-one-used";
+      rightPart="rect-active-two-used";
+}else console.log("OJO QUE NO SE HA CUMPLIDO CONDICION")
+ 
+   // console.log("usedTwoTimesClass-> "+usedTwoTimesClass +"porque used= " +usedCurrentInterval);
+    d3.select("#string-"+string+"-"+interval+"-left" ).attr("class",leftPart)
+    d3.select("#string-"+string+"-12-"+interval+"-left").attr("class",leftPart)
+    d3.select("#string-"+string+"-"+interval+"-right" ).attr("class",rightPart)
+    d3.select("#string-"+string+"-12-"+interval+"-right").attr("class",rightPart)
+
+    return;
 
  },
+ resetCircles: function(){
+ for (var string=1; string<7; string++) {
+    d3.select("#string"+string).selectAll('circle').each(function() {
+    d3.select(this).attr("data-used",0);
+    //
+    d3.select(this).attr("class","circle-hidden");
+  });
+    d3.select("#string"+string).selectAll('text').each(function() {
+    d3.select(this).text("");
+  });
+ d3.select("#string"+string).selectAll('rect').each(function() {
+    d3.select(this).attr("class","rect-hidden");
+  });
+   
+
+ }
+    return
+  },
  updateCircles: function(string,interval){
 
   d3.select("#string"+string).selectAll('circle').filter(function() {
       return d3.select(this).attr("data-interval") == interval;
   }).each(function(){
-    
-    var used =d3.select(this).attr("data-used");
-
-
     if(interval === 'F'){
         d3.select(this).attr("class",'circle-active-tonica');
     }else   d3.select(this).attr("class",'circle-active');
-       d3.select(this).attr("data-used",+parseInt(used)+1);
+
+     //var used =d3.select(this).attr("data-used");
+       //d3.select(this).attr("data-used",+parseInt(used)+1);
   });
 
  },

@@ -23,8 +23,8 @@ const state = {
     },
     modesNames : [
       
-      { name: 'Pentatonic Mayor', index: 1 , mayorRelative : 0, minorRelative: 0},
-      { name: 'Pentatonic Menor', index: 2 , mayorRelative : 0, minorRelative: 0},
+      { name: 'Major Pentatonic', index: 1 , mayorRelative : 0, minorRelative: 0},
+      { name: 'Minor Pentatonic', index: 2 , mayorRelative : 0, minorRelative: 0},
       { name: 'Major / Ionian', index: 3 , mayorRelative : 0, minorRelative: 9},
       { name: 'Dorian', index: 4 , mayorRelative : 10, minorRelative: 7},
       { name: 'Phrygian', index: 5 , mayorRelative : 8, minorRelative: 5},

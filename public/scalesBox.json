@@ -56,7 +56,7 @@
         { "id": 11, "cuerda": 5, "intervalo": "4J"},{ "id": 12, "cuerda": 5, "intervalo": "5J"},{ "id": 13, "cuerda": 5, "intervalo": "6M"},
         { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
        ],
-       "box1_Pent_Mayor":[
+       "box1_Pent_Mayor1":[
         { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},
         { "id": 2, "cuerda": 2, "intervalo": "5J"},{ "id": 3, "cuerda": 2, "intervalo": "6M"},
         { "id": 4, "cuerda": 3, "intervalo": "2M"},{ "id": 5, "cuerda": 3, "intervalo": "3M"},
@@ -64,7 +64,15 @@
         { "id": 8, "cuerda": 5, "intervalo": "3M"},{ "id": 9, "cuerda": 5, "intervalo": "5J"},
         { "id": 10, "cuerda": 6, "intervalo": "F"},{ "id": 11, "cuerda": 6, "intervalo": "2M"}
        ],
-        "box2_Pent_Mayo":[
+       "box1_Pent_Mayor":[
+        { "1": [ "F", "2M"] },
+        { "2": [ "5J", "6M"]},
+        { "3": [ "2M", "3M"]},
+        { "4": [ "6M", "F"]},
+        { "5": [ "3M", "5J"]},
+        { "6": [ "F", "2M"]}
+      ],
+        "box2_Pent_Mayor":[
         { "id": 0, "cuerda": 1, "intervalo": "2M"},{ "id": 1, "cuerda": 1, "intervalo": "3M"},
         { "id": 2, "cuerda": 2, "intervalo": "6M"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
         { "id": 4, "cuerda": 3, "intervalo": "3M"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
@@ -72,7 +80,7 @@
         { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "6M"},
         { "id": 10, "cuerda": 6, "intervalo": "2M"},{ "id": 11, "cuerda": 6, "intervalo": "3M"}
        ],
-       "box3_Pent_Mayo":[
+       "box3_Pent_Mayor":[
         { "id": 0, "cuerda": 1, "intervalo": "2M"},{ "id": 1, "cuerda": 1, "intervalo": "3M"},
         { "id": 2, "cuerda": 2, "intervalo": "6M"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
         { "id": 4, "cuerda": 3, "intervalo": "3M"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
@@ -80,7 +88,7 @@
         { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "6M"},
         { "id": 10, "cuerda": 6, "intervalo": "2M"},{ "id": 11, "cuerda": 6, "intervalo": "3M"}
        ],
-       "box4_Pent_Mayo":[
+       "box4_Pent_Mayor":[
         { "id": 0, "cuerda": 1, "intervalo": "2M"},{ "id": 1, "cuerda": 1, "intervalo": "3M"},
         { "id": 2, "cuerda": 2, "intervalo": "6M"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
         { "id": 4, "cuerda": 3, "intervalo": "3M"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
@@ -88,7 +96,7 @@
         { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "6M"},
         { "id": 10, "cuerda": 6, "intervalo": "2M"},{ "id": 11, "cuerda": 6, "intervalo": "3M"}
        ],
-       "box5_Pent_Mayo":[
+       "box5_Pent_Mayor":[
         { "id": 0, "cuerda": 1, "intervalo": "2M"},{ "id": 1, "cuerda": 1, "intervalo": "3M"},
         { "id": 2, "cuerda": 2, "intervalo": "6M"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
         { "id": 4, "cuerda": 3, "intervalo": "3M"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
