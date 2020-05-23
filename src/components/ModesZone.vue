@@ -9,7 +9,6 @@
    >{{mode.name}}
 </button>
 {{this.scalesUsed}}
---{{this.scalesBoxData}}
 {{ this.paintAllScales()}}
 </div>
 </template>
@@ -35,24 +34,18 @@ export default {
       scaledPainted:function() {
          return  this.$store.getters.scalesPainted
       },
-      getBox1_Pent_Mayor:function() {
+ /*      getBox1_Pent_Mayor:function() {
          return  this.$store.getters.box1_Pent_Mayor
-      }
+      } */
   }, 
    created() {
-    //console.log("ControlPanelZone created");
      this.fetchDataInitial();
-     //this.scalesBoxData = this.getBox1_Pent_Mayor;
-     //console.log("ControlPanelZone created<-");
+
   },
   beforeUpdate(){
       console.log('beforeUpdate ModesZone');
-       var keys = Object.keys(this.scalesBoxData);
-          console.log(keys[7]); 
-       //   await this.$nextTick();
-       //this.$nextTick(this.paintAllScales(this.scalesBoxData));
-       //this.$nextTick(() => this.paintAllScales());
-      // this.paintAllScales(this.scalesBoxData);
+  /*      var keys = Object.keys(this.scalesBoxData);
+          console.log(keys[7]);  */
       console.log('beforeUpdate ModesZone<-');
   },
   update(){
@@ -63,14 +56,10 @@ export default {
        let scalesBox = await d3.json("./scalesBox.json");
       //console.log("scalesBox tras el await" + JSON.stringify(scalesBox, null, 2));
       this.scalesBoxData = scalesBox;
-      // console.log("JODERRRRRRRRRRRRRRRRRRRRRRRRR->" +JSON.stringify(this.scalesBoxData, null, 2))
-       //console.log("BoxNotes->" +JSON.stringify(this.scalesBoxData["box1_Pent_Mayor"], null, 2))
-/*           var keys = Object.keys(this.scalesBoxData);
-          console.log(keys[7]);  */
+
     },
     showMode: function(mode,$event){
       //console.log('showMode se ejecuta ' + mode)
-     //  console.log('scaledPainted.length ' +this.scaledPainted.length)
      $event.target.classList.toggle('btn-warning')
       if(this.scaledPainted.length<4){
         var id=0;
@@ -92,7 +81,7 @@ export default {
         if(freeSpace){
       var scale = {};
               scale ["id"] = id
-              scale ["mode"] = mode;
+              scale ["mode"] = mode //parseInt(mode)+1;
               scale ["used"] = true;
               var onlyBoxes = [] //its the first time that i paint the scale so onlyBoxes = empty
               scale ["onlyBoxes"] = onlyBoxes;
@@ -100,14 +89,11 @@ export default {
               scale ["mayorRelative"] = this.$store.state.initialData.modesNames[mode].mayorRelative;
               scale ["minorRelative"] = this.$store.state.initialData.modesNames[mode].minorRelative; */
               this.$store.commit('addScalePainted',scale);
-              //this.paintAllScales(this.scalesBoxData);
               this.paintAllScales();
       }
     }
   },
   paintAllScales: function(){
-    //paintAllScales: function(InternalscalesBoxData){
-
     var used ='';
     for(var key in this.scaledPainted) {
          if(this.scaledPainted[key].used==true){
@@ -119,17 +105,14 @@ export default {
       this.resetCircles();
         for(var index in this.scaledPainted) {
           console.log("Pinto el scaledPainted !!!!" + index);
-         // if(this.scaledPainted[index].used) this.paintScale(this.scaledPainted[index].onlyBoxes,this.scaledPainted[index].mode,used,index,InternalscalesBoxData);
           if(this.scaledPainted[index].used) this.paintScale(this.scaledPainted[index].onlyBoxes,this.scaledPainted[index].mode,used,index);
 
         }
       return;
   },
- //paintScale:function(onlyBoxes,indexMode,used,numberScaledPainted,internalscalesBoxData){
    paintScale:function(onlyBoxes,indexMode,used,numberScaledPainted){
       //console.log("scaleNotes->" +JSON.stringify(this.$store.state.getter.scalesPainted, null, 2))
      //console.log("paintScale-> Pintamos el indexMode ->"+indexMode +"used-> " +used);
-    // console.log("InternalscalesBoxData ->"+internalscalesBoxData);
       var scaleInterval ="";
      if(onlyBoxes.length==0 ||onlyBoxes[0]==0){
        //console.log("Hay que pintar escala completa");
@@ -142,15 +125,13 @@ export default {
         }
       }else {
         //console.log("Hay que pintar boxes");
-        //onlyBoxes.forEach(function(box){
         for(var box in onlyBoxes) {  
-          console.log("box to paint->" +box);
-                 
-            //var boxToPaint = this.getScalesBoxData["box1_Pent_Mayor"];
-            // var boxToPaint = this.getBox1_Pent_Mayor;
-             var boxToPaint = this.scalesBoxData["box1_Pent_Mayor"];
-           //var boxToPaint = internalscalesBoxData["box1_Pent_Mayor"];
-             //console.log("box to paint->" +boxToPaint);
+          console.log("box to paint->" +onlyBoxes[box]);
+            var name = "box"+onlyBoxes[box]+"_"+this.$store.getters.scaleIntervals[parseInt(indexMode)-1].name;
+             console.log("scale name to search->" +name);
+            //var boxToPaint = this.scalesBoxData["box1_pentatonicaMayor"];
+            var boxToPaint = this.scalesBoxData[name];
+            // console.log("box to paint->" +boxToPaint2);
             Object.keys(boxToPaint).forEach(key => {
             // console.log(key + ' - ' + JSON.stringify(boxToPaint[key], null, 2));
              var stringToPaint = boxToPaint[key];
@@ -196,10 +177,6 @@ export default {
     // console.log("entra en 2!!!!!!")
       this.updateColumRect(string,interval);
   }  
-   /*  console.log("Actualizo data-used con ===================================")
-     console.log("name 2º parte-> "+name +" - usedCurrentInterval-> " +usedCurrentInterval );
-     console.log(" ===================================") */
-
     d3.select("#string-"+string+"-"+interval).attr("data-used",parseInt(usedCurrentInterval)+1);
     return ;
  },
@@ -263,8 +240,6 @@ if(usedCurrentInterval==0){
         d3.select(this).attr("class",'circle-active-tonica');
     }else   d3.select(this).attr("class",'circle-active');
 
-     //var used =d3.select(this).attr("data-used");
-       //d3.select(this).attr("data-used",+parseInt(used)+1);
   });
 
  },
@@ -285,18 +260,18 @@ if(usedCurrentInterval==0){
 
  },
   getNoteNameFromInterval: function(interval,tonica){
-var intervaloPosition = '';
-var tonicaPosition = '';
-var notePosition = '';
-/* console.log("interval->" +interval);
-console.log("tonica->" +tonica); */
- for(var key in this.$store.getters.intervalsInfo) {
-     if(this.$store.getters.intervalsInfo[key].name == interval)  {
-      intervaloPosition = this.$store.getters.intervalsInfo[key].intervalo;
-      break;
+    var intervaloPosition = '';
+    var tonicaPosition = '';
+    var notePosition = '';
+    /* console.log("interval->" +interval);
+    console.log("tonica->" +tonica); */
+    for(var key in this.$store.getters.intervalsInfo) {
+        if(this.$store.getters.intervalsInfo[key].name == interval)  {
+          intervaloPosition = this.$store.getters.intervalsInfo[key].intervalo;
+          break;
 
-     }
- }   
+        }
+    }   
   for(var keyNote in this.$store.getters.mastilNotes) {
       if(this.$store.getters.mastilNotes[keyNote].label == tonica)  {
          //console.log("Label->" +this.$store.getters.mastilNotes[keyNote].label);

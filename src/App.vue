@@ -177,12 +177,17 @@
     </div>
 
 </div>  
-
+<div class="row">
+  <div class="col-12">
+     <ChordsZone :scalesUsed="this.scalesPainted"/>
+  </div>
+</div>
   </div>
 </template>
 
 <script>
 import ModesZone from './components/ModesZone.vue';
+import ChordsZone from './components/ChordsZone.vue';
 import ControlPanelZone from './components/ControlPanelZone.vue';
 import ScalesSelectedZone from  './components/ScalesSelectedZone.vue';
 //import GuitarBoard from './components/GuitarBoard.vue';
@@ -192,9 +197,8 @@ import ScalesSelectedZone from  './components/ScalesSelectedZone.vue';
 export default {
   name: 'App',
   components: {
-  /*   HelloWorld, */
-    //GuitarBoard,
     ModesZone,
+    ChordsZone,
     ControlPanelZone,
    ScalesSelectedZone,
    

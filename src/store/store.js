@@ -36,12 +36,7 @@ export default new Vuex.Store({
     tonica: state=>state.tonica,
     scalesPainted: state=>state.scalesPainted
     },
-  
-/*   getters: { // cuando hay que aplicar cierta logica a la hora de recuperarlo del state
-    doneTodos: state => {
-      return state.todos.filter(todo => todo.done)
-    }
-  }, en la .vue recuperarlo con store.getters.doneTodos*/
+
   mutations: {
     updateIntervalStartRoot: (state, payload) => {
       state.intervalStartRoot = payload

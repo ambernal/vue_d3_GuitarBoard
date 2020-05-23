@@ -1,149 +1,142 @@
-  {
-       "box_Ionian":[ 
-        { "id": 0, "cuerda": 1, "intervalo": "7M"},{ "id": 1, "cuerda": 1, "intervalo": "F"},{ "id": 2, "cuerda": 1, "intervalo": "2M"},
-        { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6M"},
-        { "id": 5, "cuerda": 3, "intervalo": "2M"},{ "id": 6, "cuerda": 3, "intervalo": "3M"},{ "id": 7, "cuerda": 3, "intervalo": "4J"},
-        { "id": 8, "cuerda": 4, "intervalo": "6M"},{ "id": 9, "cuerda": 4, "intervalo": "7M"},{ "id": 10, "cuerda": 4, "intervalo": "F"},
-        { "id": 11, "cuerda": 5, "intervalo": "3M"},{ "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},
-        { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"}
-      ],
-       "box_Dorian":[
-        { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
-        { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6M"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
-        { "id": 6, "cuerda": 3, "intervalo": "2M"},{ "id": 7, "cuerda": 3, "intervalo": "3m"},{ "id": 8, "cuerda": 3, "intervalo": "4J"},
-        { "id": 9, "cuerda": 4, "intervalo": "6M"},{ "id": 10, "cuerda": 4, "intervalo": "7m"},{ "id": 11, "cuerda": 4, "intervalo": "F"},
-        { "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},
-        { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
-      ],
-       "box_Phrygian":[
-        { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
-        { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6m"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
-        { "id": 6, "cuerda": 3, "intervalo": "3M"},{ "id": 7, "cuerda": 3, "intervalo": "4J"},
-        { "id": 8, "cuerda": 4, "intervalo": "7m"},{ "id": 9, "cuerda": 4, "intervalo": "F"},{ "id": 10, "cuerda": 4, "intervalo": "2M"},
-        { "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},{ "id": 11, "cuerda": 5, "intervalo": "6m"},
-        { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
-       ],
-       "box_LydianESTAMAL":[
-        { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
-        { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6m"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
-        { "id": 6, "cuerda": 3, "intervalo": "3M"},{ "id": 7, "cuerda": 3, "intervalo": "4J"},
-        { "id": 8, "cuerda": 4, "intervalo": "7m"},{ "id": 9, "cuerda": 4, "intervalo": "F"},{ "id": 10, "cuerda": 4, "intervalo": "2M"},
-        { "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},{ "id": 11, "cuerda": 5, "intervalo": "6m"},
-        { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
-       ],
+{
+  "box_Ionian":[ 
+   { "id": 0, "cuerda": 1, "intervalo": "7M"},{ "id": 1, "cuerda": 1, "intervalo": "F"},{ "id": 2, "cuerda": 1, "intervalo": "2M"},
+   { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6M"},
+   { "id": 5, "cuerda": 3, "intervalo": "2M"},{ "id": 6, "cuerda": 3, "intervalo": "3M"},{ "id": 7, "cuerda": 3, "intervalo": "4J"},
+   { "id": 8, "cuerda": 4, "intervalo": "6M"},{ "id": 9, "cuerda": 4, "intervalo": "7M"},{ "id": 10, "cuerda": 4, "intervalo": "F"},
+   { "id": 11, "cuerda": 5, "intervalo": "3M"},{ "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},
+   { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"}
+ ],
+  "box_Dorian":[
+   { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
+   { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6M"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
+   { "id": 6, "cuerda": 3, "intervalo": "2M"},{ "id": 7, "cuerda": 3, "intervalo": "3m"},{ "id": 8, "cuerda": 3, "intervalo": "4J"},
+   { "id": 9, "cuerda": 4, "intervalo": "6M"},{ "id": 10, "cuerda": 4, "intervalo": "7m"},{ "id": 11, "cuerda": 4, "intervalo": "F"},
+   { "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},
+   { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
+ ],
+  "box_Phrygian":[
+   { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
+   { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6m"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
+   { "id": 6, "cuerda": 3, "intervalo": "3M"},{ "id": 7, "cuerda": 3, "intervalo": "4J"},
+   { "id": 8, "cuerda": 4, "intervalo": "7m"},{ "id": 9, "cuerda": 4, "intervalo": "F"},{ "id": 10, "cuerda": 4, "intervalo": "2M"},
+   { "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},{ "id": 11, "cuerda": 5, "intervalo": "6m"},
+   { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
+  ],
+  "box_LydianESTAMAL":[
+   { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
+   { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6m"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
+   { "id": 6, "cuerda": 3, "intervalo": "3M"},{ "id": 7, "cuerda": 3, "intervalo": "4J"},
+   { "id": 8, "cuerda": 4, "intervalo": "7m"},{ "id": 9, "cuerda": 4, "intervalo": "F"},{ "id": 10, "cuerda": 4, "intervalo": "2M"},
+   { "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},{ "id": 11, "cuerda": 5, "intervalo": "6m"},
+   { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
+  ],
 
-       "box_Mixolydian":[
-        { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},
-        { "id": 2, "cuerda": 2, "intervalo": "5J"},{ "id": 3, "cuerda": 2, "intervalo": "6M"},{ "id": 4, "cuerda": 2, "intervalo": "7m"},
-        { "id": 5, "cuerda": 3, "intervalo": "2M"},{ "id": 6, "cuerda": 3, "intervalo": "3M"},{ "id": 7, "cuerda": 3, "intervalo": "4J"},
-        { "id": 8, "cuerda": 4, "intervalo": "6M"},{ "id": 9, "cuerda": 4, "intervalo": "7m"},{ "id": 10, "cuerda": 4, "intervalo": "F"},
-        { "id": 11, "cuerda": 5, "intervalo": "3M"},{ "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},
-        { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"}
-       ],
-       "box_Aeolian":[
-        { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
-        { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6m"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
-        { "id": 6, "cuerda": 3, "intervalo": "2M"},{ "id": 7, "cuerda": 3, "intervalo": "3m"},{ "id": 8, "cuerda": 3, "intervalo": "4J"},
-        { "id": 9, "cuerda": 4, "intervalo": "7m"},{ "id": 10, "cuerda": 4, "intervalo": "F"},
-        { "id": 11, "cuerda": 5, "intervalo": "4J"},{ "id": 12, "cuerda": 5, "intervalo": "5J"},{ "id": 13, "cuerda": 5, "intervalo": "6m"},
-        { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
-       ],
-       "box_Locrian":[
-        { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
-        { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6m"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
-        { "id": 6, "cuerda": 3, "intervalo": "2M"},{ "id": 7, "cuerda": 3, "intervalo": "3m"},{ "id": 8, "cuerda": 3, "intervalo": "4J"},
-        { "id": 9, "cuerda": 4, "intervalo": "7m"},{ "id": 10, "cuerda": 4, "intervalo": "F"},
-        { "id": 11, "cuerda": 5, "intervalo": "4J"},{ "id": 12, "cuerda": 5, "intervalo": "5J"},{ "id": 13, "cuerda": 5, "intervalo": "6M"},
-        { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
-       ],
-       "box1_Pent_Mayor1":[
-        { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},
-        { "id": 2, "cuerda": 2, "intervalo": "5J"},{ "id": 3, "cuerda": 2, "intervalo": "6M"},
-        { "id": 4, "cuerda": 3, "intervalo": "2M"},{ "id": 5, "cuerda": 3, "intervalo": "3M"},
-        { "id": 6, "cuerda": 4, "intervalo": "6M"},{ "id": 7, "cuerda": 4, "intervalo": "F"},
-        { "id": 8, "cuerda": 5, "intervalo": "3M"},{ "id": 9, "cuerda": 5, "intervalo": "5J"},
-        { "id": 10, "cuerda": 6, "intervalo": "F"},{ "id": 11, "cuerda": 6, "intervalo": "2M"}
-       ],
-       "box1_Pent_Mayor":[
-        { "1": [ "F", "2M"] },
-        { "2": [ "5J", "6M"]},
-        { "3": [ "2M", "3M"]},
-        { "4": [ "6M", "F"]},
-        { "5": [ "3M", "5J"]},
-        { "6": [ "F", "2M"]}
-      ],
-        "box2_Pent_Mayor":[
-        { "id": 0, "cuerda": 1, "intervalo": "2M"},{ "id": 1, "cuerda": 1, "intervalo": "3M"},
-        { "id": 2, "cuerda": 2, "intervalo": "6M"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
-        { "id": 4, "cuerda": 3, "intervalo": "3M"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
-        { "id": 6, "cuerda": 4, "intervalo": "F"},{ "id": 7, "cuerda": 4, "intervalo": "2M"},
-        { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "6M"},
-        { "id": 10, "cuerda": 6, "intervalo": "2M"},{ "id": 11, "cuerda": 6, "intervalo": "3M"}
-       ],
-       "box3_Pent_Mayor":[
-        { "id": 0, "cuerda": 1, "intervalo": "2M"},{ "id": 1, "cuerda": 1, "intervalo": "3M"},
-        { "id": 2, "cuerda": 2, "intervalo": "6M"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
-        { "id": 4, "cuerda": 3, "intervalo": "3M"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
-        { "id": 6, "cuerda": 4, "intervalo": "F"},{ "id": 7, "cuerda": 4, "intervalo": "2M"},
-        { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "6M"},
-        { "id": 10, "cuerda": 6, "intervalo": "2M"},{ "id": 11, "cuerda": 6, "intervalo": "3M"}
-       ],
-       "box4_Pent_Mayor":[
-        { "id": 0, "cuerda": 1, "intervalo": "2M"},{ "id": 1, "cuerda": 1, "intervalo": "3M"},
-        { "id": 2, "cuerda": 2, "intervalo": "6M"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
-        { "id": 4, "cuerda": 3, "intervalo": "3M"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
-        { "id": 6, "cuerda": 4, "intervalo": "F"},{ "id": 7, "cuerda": 4, "intervalo": "2M"},
-        { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "6M"},
-        { "id": 10, "cuerda": 6, "intervalo": "2M"},{ "id": 11, "cuerda": 6, "intervalo": "3M"}
-       ],
-       "box5_Pent_Mayor":[
-        { "id": 0, "cuerda": 1, "intervalo": "2M"},{ "id": 1, "cuerda": 1, "intervalo": "3M"},
-        { "id": 2, "cuerda": 2, "intervalo": "6M"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
-        { "id": 4, "cuerda": 3, "intervalo": "3M"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
-        { "id": 6, "cuerda": 4, "intervalo": "F"},{ "id": 7, "cuerda": 4, "intervalo": "2M"},
-        { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "6M"},
-        { "id": 10, "cuerda": 6, "intervalo": "2M"},{ "id": 11, "cuerda": 6, "intervalo": "3M"}
-       ],
-       "box1_Pent_Menor":[
-        { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "3m"},
-        { "id": 2, "cuerda": 2, "intervalo": "5J"},{ "id": 3, "cuerda": 2, "intervalo": "7m"},
-        { "id": 4, "cuerda": 3, "intervalo": "3m"},{ "id": 5, "cuerda": 3, "intervalo": "4J"},
-        { "id": 6, "cuerda": 4, "intervalo": "7m"},{ "id": 7, "cuerda": 4, "intervalo": "F"},
-        { "id": 8, "cuerda": 5, "intervalo": "4J"},{ "id": 9, "cuerda": 5, "intervalo": "5J"},
-        { "id": 10, "cuerda": 6, "intervalo": "F"},{ "id": 11, "cuerda": 6, "intervalo": "3m"}
-       ],
-       "box2_Pent_Menor":[
-        { "id": 0, "cuerda": 1, "intervalo": "3m"},{ "id": 1, "cuerda": 1, "intervalo": "4J"},
-        { "id": 2, "cuerda": 2, "intervalo": "7m"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
-        { "id": 4, "cuerda": 3, "intervalo": "4J"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
-        { "id": 6, "cuerda": 4, "intervalo": "F"},{ "id": 7, "cuerda": 4, "intervalo": "3m"},
-        { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "7m"},
-        { "id": 10, "cuerda": 6, "intervalo": "3m"},{ "id": 11, "cuerda": 6, "intervalo": "4J"}
-       ],
-       "box3_Pent_Menor":[
-        { "id": 0, "cuerda": 1, "intervalo": "3m"},{ "id": 1, "cuerda": 1, "intervalo": "4J"},
-        { "id": 2, "cuerda": 2, "intervalo": "7m"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
-        { "id": 4, "cuerda": 3, "intervalo": "4J"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
-        { "id": 6, "cuerda": 4, "intervalo": "F"},{ "id": 7, "cuerda": 4, "intervalo": "3m"},
-        { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "7m"},
-        { "id": 10, "cuerda": 6, "intervalo": "3m"},{ "id": 11, "cuerda": 6, "intervalo": "4J"}
-       ],
-       "box4_Pent_Menor":[
-        { "id": 0, "cuerda": 1, "intervalo": "3m"},{ "id": 1, "cuerda": 1, "intervalo": "4J"},
-        { "id": 2, "cuerda": 2, "intervalo": "7m"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
-        { "id": 4, "cuerda": 3, "intervalo": "4J"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
-        { "id": 6, "cuerda": 4, "intervalo": "F"},{ "id": 7, "cuerda": 4, "intervalo": "3m"},
-        { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "7m"},
-        { "id": 10, "cuerda": 6, "intervalo": "3m"},{ "id": 11, "cuerda": 6, "intervalo": "4J"}
-       ],
-       "box5_Pent_Menor":[
-        { "id": 0, "cuerda": 1, "intervalo": "3m"},{ "id": 1, "cuerda": 1, "intervalo": "4J"},
-        { "id": 2, "cuerda": 2, "intervalo": "7m"},{ "id": 3, "cuerda": 2, "intervalo": "F"},
-        { "id": 4, "cuerda": 3, "intervalo": "4J"},{ "id": 5, "cuerda": 3, "intervalo": "5J"},
-        { "id": 6, "cuerda": 4, "intervalo": "F"},{ "id": 7, "cuerda": 4, "intervalo": "3m"},
-        { "id": 8, "cuerda": 5, "intervalo": "5J"},{ "id": 9, "cuerda": 5, "intervalo": "7m"},
-        { "id": 10, "cuerda": 6, "intervalo": "3m"},{ "id": 11, "cuerda": 6, "intervalo": "4J"}
-       ]
-       
+  "box_Mixolydian":[
+   { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},
+   { "id": 2, "cuerda": 2, "intervalo": "5J"},{ "id": 3, "cuerda": 2, "intervalo": "6M"},{ "id": 4, "cuerda": 2, "intervalo": "7m"},
+   { "id": 5, "cuerda": 3, "intervalo": "2M"},{ "id": 6, "cuerda": 3, "intervalo": "3M"},{ "id": 7, "cuerda": 3, "intervalo": "4J"},
+   { "id": 8, "cuerda": 4, "intervalo": "6M"},{ "id": 9, "cuerda": 4, "intervalo": "7m"},{ "id": 10, "cuerda": 4, "intervalo": "F"},
+   { "id": 11, "cuerda": 5, "intervalo": "3M"},{ "id": 12, "cuerda": 5, "intervalo": "4J"},{ "id": 13, "cuerda": 5, "intervalo": "5J"},
+   { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"}
+  ],
+  "box_Aeolian":[
+   { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
+   { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6m"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
+   { "id": 6, "cuerda": 3, "intervalo": "2M"},{ "id": 7, "cuerda": 3, "intervalo": "3m"},{ "id": 8, "cuerda": 3, "intervalo": "4J"},
+   { "id": 9, "cuerda": 4, "intervalo": "7m"},{ "id": 10, "cuerda": 4, "intervalo": "F"},
+   { "id": 11, "cuerda": 5, "intervalo": "4J"},{ "id": 12, "cuerda": 5, "intervalo": "5J"},{ "id": 13, "cuerda": 5, "intervalo": "6m"},
+   { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
+  ],
+  "box_Locrian":[
+   { "id": 0, "cuerda": 1, "intervalo": "F"},{ "id": 1, "cuerda": 1, "intervalo": "2M"},{ "id": 2, "cuerda": 1, "intervalo": "3m"},
+   { "id": 3, "cuerda": 2, "intervalo": "5J"},{ "id": 4, "cuerda": 2, "intervalo": "6m"},{ "id": 5, "cuerda": 2, "intervalo": "7m"},
+   { "id": 6, "cuerda": 3, "intervalo": "2M"},{ "id": 7, "cuerda": 3, "intervalo": "3m"},{ "id": 8, "cuerda": 3, "intervalo": "4J"},
+   { "id": 9, "cuerda": 4, "intervalo": "7m"},{ "id": 10, "cuerda": 4, "intervalo": "F"},
+   { "id": 11, "cuerda": 5, "intervalo": "4J"},{ "id": 12, "cuerda": 5, "intervalo": "5J"},{ "id": 13, "cuerda": 5, "intervalo": "6M"},
+   { "id": 14, "cuerda": 6, "intervalo": "F"},{ "id": 15, "cuerda": 6, "intervalo": "2M"},{ "id": 16, "cuerda": 6, "intervalo": "3m"}
+  ],
+  "box1_pentatonicaMayor":[
+   { "1": [ "F", "2M"]},
+   { "2": [ "5J", "6M"]},
+   { "3": [ "2M", "3M"]},
+   { "4": [ "6M", "F"]},
+   { "5": [ "3M", "5J"]},
+   { "6": [ "F", "2M"]}
+ ],
+ "box2_pentatonicaMayor":[
+   { "1": [ "2M", "3M"]},
+   { "2": [ "6M", "F"]},
+   { "3": [ "3M", "5J"]},
+   { "4": [ "F", "2M"]},
+   { "5": [ "5J", "6M"]},
+   { "6": [ "2M", "3M"]}
+ ],
+ "box3_pentatonicaMayor":[
+   { "1": [ "3M", "3M"]},
+   { "2": [ "F", "2M"]},
+   { "3": [ "5J", "6M"]},
+   { "4": [ "2M", "3M"]},
+   { "5": [ "6M", "F"]},
+   { "6": [ "3M", "5J"]}
+ ],
+ "box4_pentatonicaMayor":[
+   { "1": ["5J", "6M"]},
+   { "2": [ "2M", "3M"]},
+   { "3": [ "6M", "F"]},
+   { "4": [ "3M", "5J"]},
+   { "5": [ "F", "2M"]},
+   { "6": [ "5J", "6M"]}
+ ],
+ "box5_pentatonicaMayor":[
+   { "1": [ "6M", "F"]},
+   { "2": [ "3M", "5J"]},
+   { "3": [ "F", "2M"]},
+   { "4": [ "5J", "6M"]},
+   { "5": [ "2M", "3M"]},
+   { "6": [ "6M", "F"]}
+ ],
+ "box1_pentatonicaMenor":[
+   { "1": [ "F", "3m"]},
+   { "2": [ "5J", "6M"]},
+   { "3": [ "3m", "4J"]},
+   { "4": [ "7m", "F"]},
+   { "5": [ "4J", "5J"]},
+   { "6": [ "F", "3m"]}
+ ],
+ "box2_pentatonicaMenor":[
+   { "1": [ "3m", "4J"]},
+   { "2": [ "7m", "F"]},
+   { "3": [ "4J", "5J"]},
+   { "4": [ "F", "3m"]},
+   { "5": [ "5J", "7m"]},
+   { "6": [ "3m", "4J"]}
+ ],
+ "box3_pentatonicaMenor":[
+   { "1": [ "4J", "5J"]},
+   { "2": [ "F", "3m"]},
+   { "3": [ "5J", "7m"]},
+   { "4": [ "3m", "4J"]},
+   { "5": [ "7m", "F"]},
+   { "6": [ "4J", "5J"]}
+ ],
+ "box4_pentatonicaMenor":[
+   { "1": [ "5J", "7m"]},
+   { "2": [ "3m", "4J"]},
+   { "3": [ "7m", "F"]},
+   { "4": [ "4J", "5J"]},
+   { "5": [ "F", "3m"]},
+   { "6": [ "5J", "7m"]}
+ ],
+ "box5_pentatonicaMenor":[
+   { "1": [ "7m", "F"]},
+   { "2": [ "4J", "5J"]},
+   { "3": [ "F", "3m"]},
+   { "4": [ "5J", "7m"]},
+   { "5": [ "3m", "4J"]},
+   { "6": [ "7m", "F"]}
+ ]
+
+  
 
 }
