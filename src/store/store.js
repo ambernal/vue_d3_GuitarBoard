@@ -24,17 +24,19 @@ export default new Vuex.Store({
       esqui: 'false',
     },
     scalesPainted: [
-      { id: 0, mode: '0', used: false ,onlyBoxes: []},
-      { id: 1, mode: '0', used: false ,onlyBoxes: []},
-      { id: 2, mode: '0', used: false ,onlyBoxes: []},
+      { id: 0, mode: '0', used: false ,onlyBoxes: [], scale: 0},
+      { id: 1, mode: '0', used: false ,onlyBoxes: [], scale: 0},
+      { id: 2, mode: '0', used: false ,onlyBoxes: [], scale: 0},
 
-    ]    
+    ],
+    intervalsUsed:[]  
   },
   getters: {
     intervalStartRoot: state => state.intervalStartRoot,
     //intervalToPaint: state=>state.intervalToPaint,
     tonica: state=>state.tonica,
-    scalesPainted: state=>state.scalesPainted
+    scalesPainted: state=>state.scalesPainted,
+    intervalsUsed: state=>state.intervalsUsed
     },
 
   mutations: {
@@ -55,8 +57,17 @@ export default new Vuex.Store({
     },
     changeTonicNote(state,payload){
       console.log("changeTonicNote->"+payload);
-
       state.tonica=payload;
+
+    }, addIntervalUsed(state, payload){
+       // console.log('addIntervalUsed ' +JSON.stringify(payload, null, 2));
+     // console.log('addIntervalUsed state.intervalsUsed' +JSON.stringify(state.intervalsUsed, null, 2));
+     // console.log('payload.id ' +payload.id);
+      //Vue.set(state.intervalsUsed, payload.id, payload)
+      //for(var key in scaleInterval) {
+      state.intervalsUsed.push(payload);
+           // console.log('addIntervalUsed after' + JSON.stringify(state.intervalsUsed, null, 2));
+
 
     }
 /*     resetIntervalToPaint (state) {

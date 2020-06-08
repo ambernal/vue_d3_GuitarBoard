@@ -17,6 +17,9 @@
                   <button  type='button'  @click="showBox(0,$event)"  class='btn btn-outline-dark groupButton'>All </button>
              </div>
             </div>
+            <div v-else-if="this.$store.getters.scalesPainted[index].mode>9" class='scale-used' >
+              power chordss
+            </div>
             <div v-else>
               modo griegooo
             </div> 
@@ -143,7 +146,7 @@ export default {
      background-color: #CD5C5C;
 }
 .active-second-used {
-     background-color: #fff9d9;
+     background-color: #a5e0e2;
 }
 .active-third-used {
      background-color: greenyellow;

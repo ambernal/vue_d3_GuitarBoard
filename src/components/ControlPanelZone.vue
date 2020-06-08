@@ -23,7 +23,7 @@
               <div class="nav-link"> Panel de control</div>
             </li>
             <li class="nav-item ">
-                <select class="select-css" v-on:change="changeItem(rowId, $event)">
+                <select class="select-css" v-on:change="changeItem($event)">
                     <option>select Display </option>
                     <option value="interval">Interval</option>
                     <option value="notes">Notes</option>
@@ -37,7 +37,8 @@
 
 </template>
 <script>
-import * as d3 from "d3";
+import {d3Functions} from "./utils/paintd3Elements.js"; 
+
  /*const d3 = {
   ...require('d3-geo'),
   ...require('d3-tile'),
@@ -68,32 +69,15 @@ export default {
     changeTonicNote: function changeItem( event) {
      this.$store.commit('changeTonicNote',event.target.value);
     },
-    changeItem: function changeItem(rowId, event) {
+    changeItem: function changeItem(event) {
       this.selected = event.target.value;
       if(this.selected=="interval") {
-        this.showInterval();
+        d3Functions.showInterval();
       }else{
-        this.showNotes();
+        d3Functions.showNotes();
       }
     },
-    showInterval:function(){
-        for (var string=1; string<7; string++) {
-          d3.select("#string"+string).selectAll('text').filter(function() {
-               return d3.select(this).text() != "";
-           }).each(function(){
-            d3.select(this).text(d3.select(this).attr("data-interval"));
-           });
-      }
-   },
-    showNotes:function(){
-        for (var string=1; string<7; string++) {
-          d3.select("#string"+string).selectAll('text').filter(function() {
-              return d3.select(this).text() != "";
-           }).each(function(){
-            d3.select(this).text(d3.select(this).attr("data-note"));
-           });
-      }
-   }
+
   }
 };
 </script>

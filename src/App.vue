@@ -10,9 +10,9 @@
     <rect id="fret_backdrop" transform="translate(85, 25) scale(1, 1)"
      x=0
      y=0 
-      :height='fretBoardHeight'
-      :width='fretBoardWidth'
-      class=fretboard>
+     :height='fretBoardHeight'
+     :width='fretBoardWidth'
+     class=fretboard>
       </rect> 
         <g id="frets">
            <rect
@@ -49,7 +49,38 @@
             y2=20
             class='guitarString'
           ></line>
-              <rect
+              
+             <rect
+              v-for="interval in fretIntervals"
+              :key="interval.id"
+              :id=getRectangleId(interval,index,left)
+              :fret=interval
+              :x=getRectangleXposition(interval)	
+              :y=5							
+              rx=10						
+              ry=5							
+              width=32				
+              height=30
+              :data-interval=getIntervalName(interval,index)			
+              class='rect-hidden'	
+              >
+             </rect>
+             <rect
+              v-for="interval in fretIntervals"
+              :key="interval.id"
+              :id=getRectangleId(interval,index,right)
+              :fret=interval
+              :x=getRectangleXposition(interval,right)	
+              :y=5							
+              rx=10						
+              ry=5							
+              width=32				
+              height=30
+              :data-interval=getIntervalName(interval,index)		
+              class='rect-hidden'		
+              >
+             </rect>
+             <rect
               v-for="interval in fretIntervals"
               :key="interval.id"
               :id=getRectangleId(interval,index,up)
@@ -94,36 +125,6 @@
               class='rect-hidden'		
               >
              </rect>
-             <rect
-              v-for="interval in fretIntervals"
-              :key="interval.id"
-              :id=getRectangleId(interval,index,left)
-              :fret=interval
-              :x=getRectangleXposition(interval)	
-              :y=5							
-              rx=10						
-              ry=5							
-              width=32				
-              height=30
-              :data-interval=getIntervalName(interval,index)			
-              class='rect-hidden'	
-              >
-             </rect>
-             <rect
-              v-for="interval in fretIntervals"
-              :key="interval.id"
-              :id=getRectangleId(interval,index,right)
-              :fret=interval
-              :x=getRectangleXposition(interval,right)	
-              :y=5							
-              rx=10						
-              ry=5							
-              width=32				
-              height=30
-              :data-interval=getIntervalName(interval,index)		
-              class='rect-hidden'		
-              >
-             </rect>
               <circle
               v-for="interval in fretIntervals"
               :key="interval.id"
@@ -161,7 +162,7 @@
   <div class="col-3">
     <ModesZone :scalesUsed="this.scalesPainted"/>
   </div> 
-    <div class="col-9">
+    <div class="col-8">
       <ControlPanelZone />
       <div class="row">
         <div class="col-4">
@@ -175,6 +176,9 @@
         </div> 
       </div>
     </div>
+  <div class="col-1">
+    <IntervalZone :intervalsUsed="this.intervalsUsed"/>
+  </div>  
 
 </div>  
 <div class="row">
@@ -188,9 +192,12 @@
 <script>
 import ModesZone from './components/ModesZone.vue';
 import ChordsZone from './components/ChordsZone.vue';
+import IntervalZone from './components/IntervalZone.vue';
+
 import ControlPanelZone from './components/ControlPanelZone.vue';
 import ScalesSelectedZone from  './components/ScalesSelectedZone.vue';
 //import GuitarBoard from './components/GuitarBoard.vue';
+import {utilsFunctions} from "./components/utils/utilsFunctions.js"; 
 
 //import * as d3 from 'd3';
 
@@ -201,6 +208,7 @@ export default {
     ChordsZone,
     ControlPanelZone,
    ScalesSelectedZone,
+   IntervalZone
    
   },
 
@@ -222,52 +230,28 @@ export default {
       stringTranslateSeparator : this.$store.state.initialData.boardSize.stringTranslateSeparator,
       loadData: [],
       index: 1,
-      options: [{
-          value:1,
-          label:'option1'
-      },{
-          value:2,
-          label:'option2'
-      }],
-      selected:{
-          value:1,
-          label:'option1'
-      },
       placement:'down'
     
     };
   },
   beforeUpdate(){
       console.log('beforeUpdate App');
-      for(var index in this.scaledPainted) {
-                if(this.scaledPainted[index].onlyBoxes> 0) console.log("Chupame los huevos mother fucker2!!!!");
-      }
   },
   update(){
       console.log('update App');
-
-      
-      for(var index in this.scaledPainted) {
-                if(this.scaledPainted[index].onlyBoxes> 0) console.log("Chupame los huevos mother fucker!!!!");
-      }
   },
  computed:{
        scalesPainted:function() {
          return this.$store.getters.scalesPainted
+      },
+      intervalsUsed:function() {
+         return this.$store.getters.intervalsUsed
       } 
+   
   },
   methods: {
    
-   getComplexInterval: function(interval){
-     var complexInterval = 0;
-      if(interval.startsWith("12-")){
-        var arrayDeCadenas = String(interval).split("-");
-        for (var i=0; i < arrayDeCadenas.length; i++) {
-              complexInterval = complexInterval +parseInt(arrayDeCadenas[i]);
-        }
-        return complexInterval;
-      }else return interval;
-   },
+
    getFretXposition: function(index){
       return this.$store.getters.fretTranslateStart+(this.$store.getters.fretTranslateSeparator*(index-1))
    },
@@ -281,7 +265,7 @@ export default {
    }, 
    getRectangleXposition: function(interval,position){
       var xBasePosition = '';
-      interval = this.getComplexInterval(interval);
+      interval = utilsFunctions.getComplexInterval(interval);
       if(position === 'right'){
         xBasePosition = this.$store.getters.rectangleRightTranslateStart
       }else{
@@ -291,7 +275,7 @@ export default {
    },
     getCircleOrTextXposition: function (interval) {
       
-      interval = this.getComplexInterval(interval);
+      interval = utilsFunctions.getComplexInterval(interval);
       return this.$store.getters.circleAndTextTranslateStart+ (this.$store.getters.circleAndTextTranslateSeparator*interval) 
     },
     getStringId: function(index){
@@ -307,7 +291,7 @@ export default {
       //console.log("getRectangleId-> interva- " +interval +"cuerda-> "+cuerda);
         var rectangleName ='';
        if(position === 'up'){
-          rectangleName ='-rectUp'
+          rectangleName ='-up'
       }else   if(position === 'middle'){
          rectangleName = '-middle'
       }else   if(position === 'down'){
@@ -326,12 +310,13 @@ export default {
       return this.getBaseId(interval,cuerda)
     },
     getIntervalName :function(interval,cuerda){
-      //console.log("getCircleId-> interva- " +interval +" cuerda-> "+cuerda);
+      //console.log("getIntervalName-> interval-> " +interval +" cuerda-> "+cuerda);
        var currentInterval=  this.getInterval(interval,cuerda)
          //console.log("currentInterval-> "+currentInterval);
         for(var key in this.$store.getters.intervalsInfo) {
           //console.log("bucle-> "+this.$store.getters.intervalsInfo[key].intervalo);
                 if (this.$store.getters.intervalsInfo[key].intervalo ==  currentInterval){
+                  //console.log("interval name  returned" +this.$store.getters.intervalsInfo[key].name);
                     return this.$store.getters.intervalsInfo[key].name
                 }
         }
@@ -343,8 +328,8 @@ export default {
             interval = interval.substring(3)
              //console.log("fret interval 12->"+interval);
         } 
-       var stringRootInterval = this.getIntervalFretZeroFromTonicByString(cuerda);
-        //console.log("stringRootInterval->"+stringRootInterval);
+       var stringRootInterval = utilsFunctions.getIntervalFretZeroFromTonicByString(cuerda,this.$store.getters.tonica,this.$store.getters.afinacion[cuerda-1].label,this.$store.getters.mastilNotes);
+        //console.log("stringRootInterval->"+stringRootInterval +" para interval "+interval);
        var currentIntervalToPaint = parseInt(stringRootInterval) +(parseInt(interval));
       //console.log("currentIntervalToPaint->"+currentIntervalToPaint);
      
@@ -362,54 +347,6 @@ export default {
       //console.log("getBaseId END idGenerated->"+idGenerated); 
      return idGenerated
     },
-     getIntervalFretZeroFromTonicByString: function(cuerda){
-
-    var tonica = this.$store.getters.tonica
-    var diferencia=0;
-    var tonicaBoolean=false
-    var cuerdaArrayPosition = cuerda -1;
-    var noteZero =this.$store.getters.afinacion[cuerdaArrayPosition].label;
-
-/*   console.log('getIntervalFretZeroFromTonicByString string-> '+cuerdaArrayPosition);
-    console.log('getIntervalFretZeroFromTonicByString noteZero '+noteZero );
-    console.log('getIntervalFretZeroFromTonicByString tonica '+tonica );  */ 
-  for(var key in this.$store.getters.mastilNotes) {
-        if (this.$store.getters.mastilNotes[key].label ===  noteZero) {
-          //console.log('getIntervalFretZeroFromTonicByString noteZero true');
-            noteZero=true;
-            break;
-        }else
-        if (this.$store.getters.mastilNotes[key].label ==  tonica) {
-             //console.log('getIntervalFretZeroFromTonicByString tonica true ');
-            diferencia++;
-            tonicaBoolean=true;
-
-       // }else  if (noteZero && this.$store.getters.mastilNotes[key].label !=  tonica) {
-          }else{
-          //console.log('getIntervalFretZeroFromTonicByString diferencia++');
-                diferencia++;
-        }
-    }
-    // TODO porque se repite
-    if(!tonicaBoolean){
-      //console.log('getIntervalFretZeroFromTonicByString como no se ha llegado a la tonica volvemos a recorrer');
-      //si no se ha encontrado la tonica aun volvemos a recorrer el array desde el ppio para ver el num de notas que faltan
-        for(var keySecondLoop in this.$store.getters.mastilNotes) {
-    //  console.log('getIntervalFretZeroFromTonicByString ====================mastilNotes !tonica '+this.$store.getters.mastilNotes[keySecondLoop].label );
-            if (this.$store.getters.mastilNotes[keySecondLoop].label ===  tonica) {
-               //console.log('getIntervalFretZeroFromTonicByString tonica true ');
-                tonicaBoolean=true;
-                break;
-            }else if (this.$store.getters.mastilNotes[keySecondLoop].label !=  tonica) {
-             // console.log('getIntervalFretZeroFromTonicByString diferencia++');
-                    diferencia++;
-             }
-        }
-    }
-    //console.log('getIntervalFretZeroFromTonicByString diferencia ' +diferencia);
-return diferencia;
-
-}
   }
 };
 
@@ -457,6 +394,18 @@ fill:#212529
   stroke-width:2;
 }
 
+.circle-active-tonica-iv{
+  fill:rgb(205, 50, 153);
+  stroke:lightgrey;
+  stroke-width:2;
+}
+
+.circle-active-tonica-v{
+  fill:rgb(50, 143, 205);
+  stroke:lightgrey;
+  stroke-width:2;
+}
+
 .circle-hidden{
    fill:rgba(255, 255, 255, 0.01);
   stroke:none;
@@ -473,8 +422,38 @@ fill:#212529
   stroke-width:1;
 }
 .rect-active-two-used{
-  fill:#fff9d9;
-  stroke:#fff9d9;
+  fill:#a5e0e2;
+  stroke:#a5e0e2;
   stroke-width:1;
+}
+.rect-active-three-used{
+  fill:yellowgreen;
+  stroke:yellowgreen;
+  stroke-width:1;
+}
+
+.chord0{
+  stroke:rgb(245, 200, 1);
+  stroke-width:2;
+}
+
+.chord1{
+  stroke:yellowgreen;
+  stroke-width:2;
+}
+
+.chord2{
+  stroke:yellowgreen;
+  stroke-width:2;
+}
+
+.chord3{
+  stroke:yellowgreen;
+  stroke-width:2;
+}
+
+.chord4{
+  stroke:yellowgreen;
+  stroke-width:2;
 }
 </style>

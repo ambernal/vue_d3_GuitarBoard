@@ -1,27 +1,13 @@
 <template>
-<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-  <div class="btn-group mr-2" role="group" aria-label="First group">
+<div class="btn-group-vertical"  role="group">
    <button
-    v-for="chord in chordsNames" 
-    :key="chord.id"
+    v-for="interval in intervalsInfo" 
+    :key="interval.id"
     type='button'
-    @click="showChord(chord.chordIndex,chord.scaleIntervalsIndex,$event,chord.finalString,chord.initialString)" 
+    @click="showInterval(interval.name,$event)" 
     class='btn btn-outline-dark'
-   >{{chord.name}}
-</button>
-</div>
-
- <div class="btn-group mr-2" role="group" aria-label="First group">
-   <button
-    v-for="triads in triadsName" 
-    :key="triads.id"
-    type='button'
-    @click="showChord(triads.chordIndex,triads.scaleIntervalsIndex,$event)" 
-    class='btn btn-outline-dark'
-   >{{triads.name}}
-</button>
-</div>
-
+   >{{interval.name}}
+   </button>
 </div>
 </template>
 
@@ -32,22 +18,22 @@
   ...require('d3-tile'),
 }; */
 export default {
-  name: "ChordsZone",
+  name: "IntervalZone",
   props: {
-    scalesUsed: {type: Array, default: () => []}
+    intervalsUsed: {type: Array, default: () => []}
   },  
   data() {
     return {
-      chordsNames : this.$store.getters.chords,
-      triadsName: this.$store.getters.triads,
-      scalesBoxData :'',
+     // intervalsUsed : this.$store.getters.intervalsUsed,
+      intervalsInfo: this.$store.getters.intervalsInfo,
+      //scalesBoxData :''
 
     };
   },
    computed:{
-      scaledPainted:function() {
-         return  this.$store.getters.scalesPainted
-      },
+      /*  intervalsUsed:function() {
+         return  this.$store.getters.intervalsUsed
+      },  */
   }, 
   beforeUpdate(){
       console.log('beforeUpdate ChordsZone');
@@ -56,16 +42,17 @@ export default {
       console.log('update ModesZone');
   },
   methods: {
-   showChord: function(idChord,mode,$event,finalString,initialString){
+   showInterval: function(name,$event){
      // console.log('showChord se ejecuta mode-> ' + mode +"idChord->" +idChord)
      $event.target.classList.toggle('btn-warning')
-     if(this.scaledPainted.length<4){
+      console.log("intervalsUsed->" +JSON.stringify(this.intervalsUsed, null, 2))
+
+    /*  if(this.scaledPainted.length<4){
         var id=0;
         //var used = 0;
         var freeSpace = false;
         for(var key in this.scaledPainted) {
-            /* console.log("Id Is used "+this.scaledPainted[key].id);
-             console.log("Is used "+this.scaledPainted[key].used); */
+
             if(this.scaledPainted[key].used==false &&!freeSpace){
                 id= this.scaledPainted[key].id
                 freeSpace=true;
@@ -86,7 +73,7 @@ export default {
               this.$store.commit('addScalePainted',scale);
               console.log("Chord added "+scale);
       }
-    }
+    } */
 
 
     }

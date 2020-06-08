@@ -23,7 +23,9 @@ const state = {
     },
     modesNames : [
       
-      { name: 'Major Pentatonic', index: 1 , mayorRelative : 0, minorRelative: 0},
+      { name: 'Major Pentatonic I', index: 1 , mayorRelative : 0, minorRelative: 0 , bluesChord :'I'},
+      { name: 'Major Pentatonic IV', index: 1 , mayorRelative : 0, minorRelative: 0 , bluesChord :'IV'},
+      { name: 'Major Pentatonic V', index: 1 , mayorRelative : 0, minorRelative: 0 , bluesChord :'V'},
       { name: 'Minor Pentatonic', index: 2 , mayorRelative : 0, minorRelative: 0},
       { name: 'Major / Ionian', index: 3 , mayorRelative : 0, minorRelative: 9},
       { name: 'Dorian', index: 4 , mayorRelative : 10, minorRelative: 7},
@@ -67,9 +69,9 @@ mastilNotes : [
   { id: 10, label: "G"},
   { id: 11, label: "G#"},
 ], 
-intervalsInfo : [  //old currentUsedIntervals
+intervalsInfo : [  //old currentUsedIntervals //qutiar ispart, stroke y stroke width
   { "name": "F",  "intervalo": "0", "ispart": "0" ,"stroke":"#C6BD41","stroke_width":"4" },
-  { "name": "2b", "intervalo": "1", "ispart": "0" ,"stroke":"#ff8000","stroke_width":"3" },
+  { "name": "2m", "intervalo": "1", "ispart": "0" ,"stroke":"#ff8000","stroke_width":"3" },
   { "name": "2M", "intervalo": "2",  "ispart": "0" ,"stroke":"#F08E0D","stroke_width":"3" },
   { "name": "3m", "intervalo": "3", "ispart": "0" ,"stroke":"#00e573","stroke_width":"3" },
   { "name": "3M", "intervalo": "4", "ispart": "0" ,"stroke":"#98388B","stroke_width":"3" },
@@ -84,7 +86,7 @@ intervalsInfo : [  //old currentUsedIntervals
   ],
 
     fretIntervals: ['0','1','2','3','4','5','6','7','8','9','10','11','12-0','12-1','12-2','12-3'],
-        // 0  1  2  3  4  5  6  7  8  9  10 11
+    // 0  1  2  3  4  5  6  7  8  9  10 11
     // A     B  C     D     E  F     G
 	notes : [
     { id: 0, index: 0, label: "A" , text:"A" },

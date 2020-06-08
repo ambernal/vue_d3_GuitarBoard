@@ -4,9 +4,9 @@
     v-for="mode in modesNames" 
     :key="mode.id"
     type='button'
-    @click="showMode(mode.index,$event)" 
+    @click="showMode(mode.index,mode.bluesChord,$event)" 
     class='btn btn-outline-dark'
-   >{{mode.name}}
+   >{{mode.name}} 
 </button>
 {{this.scalesUsed}}
 {{ this.paintAllScales()}}
@@ -15,6 +15,10 @@
 
 <script>
 import * as d3 from "d3";
+import {ChordsFunctions} from "./utils/paintLineChords.js";
+import {d3Functions} from "./utils/paintd3Elements.js"; 
+import {utilsFunctions} from "./utils/utilsFunctions.js"; 
+
 /* const d3 = {
   ...require('d3-geo'),
   ...require('d3-tile'),
@@ -27,7 +31,9 @@ export default {
   data() {
     return {
       modesNames : this.$store.state.initialData.modesNames,
-      scalesBoxData :''
+      scalesBoxData :'',
+      stringTranslateStart : this.$store.state.initialData.boardSize.stringTranslateStart,
+      stringTranslateSeparator : this.$store.state.initialData.boardSize.stringTranslateSeparator,
     };
   },
    computed:{
@@ -58,8 +64,8 @@ export default {
       this.scalesBoxData = scalesBox;
 
     },
-    showMode: function(mode,$event){
-      //console.log('showMode se ejecuta ' + mode)
+    showMode: function(mode,bluesChord,$event){
+      console.log('showMode se ejecuta ' + mode +" y bluesChord " +bluesChord)
      $event.target.classList.toggle('btn-warning')
       if(this.scaledPainted.length<4){
         var id=0;
@@ -85,6 +91,7 @@ export default {
               scale ["used"] = true;
               var onlyBoxes = [] //its the first time that i paint the scale so onlyBoxes = empty
               scale ["onlyBoxes"] = onlyBoxes;
+              if(typeof bluesChord !== "undefined")scale["bluesChord"] = bluesChord;
              /* scale ["name"] = this.$store.state.initialData.modesNames[mode].name;
               scale ["mayorRelative"] = this.$store.state.initialData.modesNames[mode].mayorRelative;
               scale ["minorRelative"] = this.$store.state.initialData.modesNames[mode].minorRelative; */
@@ -102,27 +109,43 @@ export default {
                 }
     }  
       //console.log("reinicio!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-      this.resetCircles();
+      d3Functions.resetCircles();
         for(var index in this.scaledPainted) {
           console.log("Pinto el scaledPainted !!!!" + index);
-          if(this.scaledPainted[index].used) this.paintScale(this.scaledPainted[index].onlyBoxes,this.scaledPainted[index].mode,used,index);
+          if(this.scaledPainted[index].used) this.paintScale(this.scaledPainted[index].onlyBoxes,this.scaledPainted[index].mode,used,index,this.scaledPainted[index].bluesChord);
 
         }
       return;
   },
-   paintScale:function(onlyBoxes,indexMode,used,numberScaledPainted){
+   paintScale:function(onlyBoxes,indexMode,used,numberScaledPainted,bluesChord){
       //console.log("scaleNotes->" +JSON.stringify(this.$store.state.getter.scalesPainted, null, 2))
      //console.log("paintScale-> Pintamos el indexMode ->"+indexMode +"used-> " +used);
       var scaleInterval ="";
-     if(onlyBoxes.length==0 ||onlyBoxes[0]==0){
+    if(indexMode>0 && (onlyBoxes.length==0 ||onlyBoxes[0]==0)){
        //console.log("Hay que pintar escala completa");
         scaleInterval = this.getScaleIntervals(parseInt(indexMode)-1);
+
+       if(typeof bluesChord !== "undefined" && bluesChord != 'I'){
+        // console.log("Hay que pintar un blueschord with diferente tonic so we have to transform intervals");
+        scaleInterval = utilsFunctions.adaptScaleIntervalToChordTonic(scaleInterval,bluesChord,this.$store.getters.intervalsInfo);
+       }
+
         for(var key in scaleInterval) {
         //  console.log("Pintamos el interval ->" +scaleInterval[key]);
-          for (var string=1; string<7; string++) {
-            this.paintInterval(string,scaleInterval[key],used,numberScaledPainted);
+       
+        let initialString =7;
+        let finalString =1;
+        if (this.scaledPainted[numberScaledPainted]["chordInitialString"]>0) {
+          initialString = parseInt(this.scaledPainted[numberScaledPainted]["chordInitialString"])+1;
+          finalString = parseInt(this.scaledPainted[numberScaledPainted]["chordFinalString"]);
+          console.log("I am painting chords by String so only paint their string ");
+        }
+          for (var string=finalString; string<initialString; string++) {
+            this.paintInterval(string,scaleInterval[key],used,numberScaledPainted,bluesChord);
           }
         }
+
+        if(this.scaledPainted[numberScaledPainted].used && this.scaledPainted[numberScaledPainted].chord)this.paintChordsLines(this.scaledPainted[numberScaledPainted].idChord);
       }else {
         //console.log("Hay que pintar boxes");
         for(var box in onlyBoxes) {  
@@ -145,6 +168,16 @@ export default {
         }
       }
 
+      // this.$store.commit('addIntervalUsed',scaleInterval);
+
+},
+paintChordsLines(chordType){
+   console.log("getChordIntervals-> - chordType ->" +chordType);
+   var chordsToUse =0;
+   chordsToUse = this.$store.getters.chords.filter(e => e["chordIndex"] == chordType  );
+   if(chordsToUse == 0) chordsToUse = this.$store.getters.triads.filter(e => e["chordIndex"] == chordType  );
+     console.log("chordsToUse" + ' - ' + JSON.stringify(chordsToUse, null, 2));
+    ChordsFunctions.getChords(chordsToUse,this.scalesBoxData,this.stringTranslateStart, this.stringTranslateSeparator);
 },
  getScaleIntervals: function( scaleType) {
   //console.log("getScaleIntervals->" +scaleType);
@@ -153,112 +186,34 @@ export default {
   return scaleNotes;
    },
 
- paintInterval: function(string,interval,scalesNumber,numberScaledPainted){
+ paintInterval: function(string,interval,scalesNumber,numberScaledPainted,bluesChord){
   var name="#string-"+string+"-"+interval;
    // console.log("paintInterval-> interval-> " +interval +" string-> "+string + " scalesNumber-> "+scalesNumber + " numberScaledPainted-> "+numberScaledPainted+" name=>"+name);
 
   var usedCurrentInterval =d3.select(name).attr("data-used");
-  // var dataInterval =d3.select(name).attr("data-interval");
   //console.log("name-> "+name +" - usedCurrentInterval-> " +usedCurrentInterval + " dataInterval-> "+dataInterval);
   
   //if this interval never has been painted and it´s the first scale dont paint background
   if(usedCurrentInterval==0){
     //console.log("entra en 0!!!!!!")
-    this.updateCircles(string,interval);
-    this.updateText(string,interval);
+    d3Functions.updateCircles(string,interval,bluesChord);
+    var notaName = this.getNoteNameFromInterval(interval,this.$store.getters.tonica)
+    d3Functions.updateText(string,interval,notaName);
 
   }
     //if this interval never has been painted <2 and it´s the second scale  paint background
    if(usedCurrentInterval<2 && scalesNumber>1){
-    /*  console.log("entra en 1!!!!!!")
-     console.log("usedCurrentInterval-> " +usedCurrentInterval ); */
-    this.updateLateralRect(string,interval,scalesNumber,usedCurrentInterval,numberScaledPainted);
+    //  console.log("entra en 1!!!!!!")
+     //console.log("usedCurrentInterval-> " +usedCurrentInterval ); 
+    d3Functions.updateLateralRect(string,interval,usedCurrentInterval,numberScaledPainted);
   }else if(usedCurrentInterval==2){
     // console.log("entra en 2!!!!!!")
-      this.updateColumRect(string,interval);
+      d3Functions.updateColumRect(string,interval);
   }  
     d3.select("#string-"+string+"-"+interval).attr("data-used",parseInt(usedCurrentInterval)+1);
     return ;
- },
- updateSingleRect: function(string,interval){
-    d3.select("#string-"+string+"-"+interval+"-left" ).attr("class","rect-active")
-   return string + interval
- },
- updateColumRect: function(string,interval){
-   return string + interval
- },
- updateLateralRect: function(string,interval,scalesNumber,usedCurrentInterval,numberScaledPainted){
+ }, 
 
-var leftPart = ""
-var rightPart = ""
-if(usedCurrentInterval==0){
-    if(numberScaledPainted ==0) {
-        leftPart ="rect-active-one-used";
-        rightPart="rect-active-one-used";
-    }else  if(numberScaledPainted ==1) {
-        leftPart ="rect-active-two-used";
-        rightPart="rect-active-two-used";
-    } 
-}else if(usedCurrentInterval==1){
-      leftPart ="rect-active-one-used";
-      rightPart="rect-active-two-used";
-}else console.log("OJO QUE NO SE HA CUMPLIDO CONDICION")
- 
-   // console.log("usedTwoTimesClass-> "+usedTwoTimesClass +"porque used= " +usedCurrentInterval);
-    d3.select("#string-"+string+"-"+interval+"-left" ).attr("class",leftPart)
-    d3.select("#string-"+string+"-12-"+interval+"-left").attr("class",leftPart)
-    d3.select("#string-"+string+"-"+interval+"-right" ).attr("class",rightPart)
-    d3.select("#string-"+string+"-12-"+interval+"-right").attr("class",rightPart)
-
-    return;
-
- },
- resetCircles: function(){
- for (var string=1; string<7; string++) {
-    d3.select("#string"+string).selectAll('circle').each(function() {
-    d3.select(this).attr("data-used",0);
-    //
-    d3.select(this).attr("class","circle-hidden");
-  });
-    d3.select("#string"+string).selectAll('text').each(function() {
-    d3.select(this).text("");
-  });
- d3.select("#string"+string).selectAll('rect').each(function() {
-    d3.select(this).attr("class","rect-hidden");
-  });
-   
-
- }
-    return
-  },
- updateCircles: function(string,interval){
-
-  d3.select("#string"+string).selectAll('circle').filter(function() {
-      return d3.select(this).attr("data-interval") == interval;
-  }).each(function(){
-    if(interval === 'F'){
-        d3.select(this).attr("class",'circle-active-tonica');
-    }else   d3.select(this).attr("class",'circle-active');
-
-  });
-
- },
-
-
-  updateText: function(string,interval){
- //console.log("updateText->");
- var tonica = this.$store.getters.tonica
-// console.log("tonica->" +tonica);
- var notaName = this.getNoteNameFromInterval(interval,tonica)
-  d3.select("#string"+string).selectAll('text').filter(function() {
-      return d3.select(this).attr("data-interval") == interval;
-  }).each(function(){
-        d3.select(this).attr("data-note",notaName);
-        d3.select(this).text(notaName);
-
-  });
-
- },
   getNoteNameFromInterval: function(interval,tonica){
     var intervaloPosition = '';
     var tonicaPosition = '';

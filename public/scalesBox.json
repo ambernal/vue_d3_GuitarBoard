@@ -135,8 +135,131 @@
    { "4": [ "5J", "7m"]},
    { "5": [ "3m", "4J"]},
    { "6": [ "7m", "F"]}
- ]
+ ],
+
+ "7Chords_from4String" :[
+  {"chord1" : [
+    { "cuerda": 1 , "intervalo" : "7" },
+    { "cuerda": 2 , "intervalo" : "3" },
+    { "cuerda": 3 , "intervalo" : "F" },
+    { "cuerda": 4 , "intervalo" : "5J"}
+    
+  ]},
+  {"chord2" : [
+    { "cuerda": 1 , "intervalo" : "F" },
+    {"cuerda": 2 , "intervalo" : "5J" },
+     { "cuerda": 3 , "intervalo" : "3" },
+    { "cuerda": 4 , "intervalo" : "7"}
+  ]},
+  {"chord3" : [
+    { "cuerda": 1 , "intervalo" : "3" },
+    { "cuerda": 2 , "intervalo" : "7" },
+    { "cuerda": 3 , "intervalo" : "5J" },
+    { "cuerda": 4 , "intervalo" : "F"}
+  ]},
+ 
+  {"chord4" : [
+    { "cuerda": 1 , "intervalo" : "5J" },
+    { "cuerda": 2 , "intervalo" : "F"},
+    { "cuerda": 3 , "intervalo" : "7" },
+    { "cuerda": 4 , "intervalo" : "3" }
+    
+  ]}
+ ],
+ "7Chords_from5String" :[
+  {"chord1" : [
+    { "cuerda": 2 , "intervalo" : "3" },
+    { "cuerda": 3 , "intervalo" : "7" },
+    { "cuerda": 4 , "intervalo" : "5J" },
+    { "cuerda": 5 , "intervalo" : "F"}
+    
+  ]},
+  {"chord2" : [
+    { "cuerda": 2 , "intervalo" : "F" },
+    {"cuerda": 3, "intervalo" : "5J" },
+     { "cuerda": 4 , "intervalo" : "3" },
+    { "cuerda": 5, "intervalo" : "7"}
+  ]},
+  {"chord3" : [
+    { "cuerda": 2 , "intervalo" : "7" },
+    { "cuerda": 3 , "intervalo" : "3" },
+    { "cuerda": 4 , "intervalo" : "F" },
+    { "cuerda": 5 , "intervalo" : "5J"}
+  ]},
+ 
+  {"chord4" : [
+    { "cuerda": 2 , "intervalo" : "5J" },
+    { "cuerda": 3 , "intervalo" : "F"},
+    { "cuerda": 4 , "intervalo" : "7" },
+    { "cuerda": 5 , "intervalo" : "3" }
+    
+  ]}
+ ],
+ "7Chords_from6String" :[
+  {"chord1" : [
+    { "cuerda": 3 , "intervalo" : "3" },
+    { "cuerda": 4 , "intervalo" : "7" },
+    { "cuerda": 5 , "intervalo" : "5J" },
+    { "cuerda": 6 , "intervalo" : "F"}
+  ]},
+  {"chord2" : [
+    { "cuerda": 3 , "intervalo" : "5J" },
+    { "cuerda": 4 , "intervalo" : "F" },
+     { "cuerda": 5 , "intervalo" : "7" },
+    { "cuerda": 6 , "intervalo" : "3"}
+  ]},
+  {"chord3" : [
+    { "cuerda": 3 , "intervalo" : "7" },
+    { "cuerda": 4 , "intervalo" : "3" },
+    { "cuerda": 5 , "intervalo" : "F" },
+    { "cuerda": 6 , "intervalo" : "5J"}
+  ]},
+ 
+  {"chord4" : [
+    { "cuerda": 3 , "intervalo" : "F" },
+    { "cuerda": 4 , "intervalo" : "5J" },
+    { "cuerda": 5 , "intervalo" : "3" },
+    { "cuerda": 6 , "intervalo" : "7"}
+  ]}
+  ],
+  "triads_from6String" :[
+    {"chord1" : [
+      { "cuerda": 1 , "intervalo" : "F" },
+      { "cuerda": 2 , "intervalo" : "5J" },
+      { "cuerda": 3 , "intervalo" : "3" },
+      { "cuerda": 4 , "intervalo" : "F" },
+      { "cuerda": 5 , "intervalo" : "5J" },
+      { "cuerda": 6 , "intervalo" : "F"}
+    ]},
+    {"chord2" : [
+      { "cuerda": 1 , "intervalo" : "3" },
+      { "cuerda": 2 , "intervalo" : "F" },
+      { "cuerda": 3 , "intervalo" : "5J" },
+      { "cuerda": 4 , "intervalo" : "3" },
+      { "cuerda": 5 , "intervalo" : "F" },
+      { "cuerda": 6 , "intervalo" : "5J"}
+    ]},
+    {"chord3" : [
+      { "cuerda": 1 , "intervalo" : "5J" },
+      { "cuerda": 2 , "intervalo" : "3" },
+      { "cuerda": 3 , "intervalo" : "F" },
+      { "cuerda": 4 , "intervalo" : "5J" },
+      { "cuerda": 5 , "intervalo" : "F" },
+      { "cuerda": 6 , "intervalo" : "5J"}
+    ]},
+   
+    {"chord4" : [
+      { "cuerda": 1 , "intervalo" : "3" },
+      { "cuerda": 2 , "intervalo" : "3" },
+      { "cuerda": 3 , "intervalo" : "F" },
+      { "cuerda": 4 , "intervalo" : "5J" },
+      { "cuerda": 5 , "intervalo" : "3" },
+      { "cuerda": 6 , "intervalo" : "F"}
+    ]}
+  ]
+ 
 
   
+
 
 }

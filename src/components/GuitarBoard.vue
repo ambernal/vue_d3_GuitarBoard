@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import * as d3 from "d3";
+//import * as d3 from "d3";
 /* const d3 = {
   ...require('d3-geo'),
   ...require('d3-tile'),
@@ -54,20 +54,17 @@ export default {
       this.initdataClass =this.initPaintData.boardSize.fretClass;
     }, */
 
-    packChart() {
+ /*    packChart() {
         const output = '';
       return output ;  
-    }
+    } */
   },
   computed: {
     
-     guitarBoardPaint(){
-var svgDashBoard = d3.select("#dashboard");
-var mastil=  svgDashBoard;
-
+/*      guitarBoardPaint(){
+      var svgDashBoard = d3.select("#dashboard");
+      var mastil=  svgDashBoard;
         return mastil;
-
-
     }, 
     packData() {
     
@@ -77,7 +74,7 @@ var mastil=  svgDashBoard;
        // let init= this.initdata;
        // console.log("data2" + JSON.stringify(init, null, 2));
       return this.initdata;
-    }
+    } */
   }
 };
 </script>
